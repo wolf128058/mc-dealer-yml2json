@@ -85,8 +85,11 @@
       // Function to display data
       function displayData(data) {
         const outputContainer = document.getElementById('output-container');
+        const metadataContainer = document.getElementById('output-container-metadata');
 
-        data.forEach(shop => {
+        metadataContainer.textContent = data.meta.latestfilemoddate_formatted
+
+        data.shops.forEach(shop => {
           // Shop Container
           const shopContainer = document.createElement('div');
           shopContainer

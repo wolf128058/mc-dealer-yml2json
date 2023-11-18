@@ -15,6 +15,10 @@ import yaml
 import json
 import re
 import traceback
+from datetime import datetime
+
+global LATEST_FILEMODDATE
+LATEST_FILEMODDATE = None
 
 def clean_minecraft_string(text):
     # Muster für Minecraft-Formatierungscodes
@@ -22,6 +26,7 @@ def clean_minecraft_string(text):
     return re.sub(pattern, '', text)    
 
 def read_yaml_files(directory):
+    global LATEST_FILEMODDATE
     data_dict = {}
     for filename in os.listdir(directory):
         if filename.endswith(".yml"):
@@ -31,6 +36,10 @@ def read_yaml_files(directory):
                 uuid = data.get("ownerUUID")
                 if uuid:
                     data_dict[uuid] = data
+                    file_stat = os.stat(os.path.join(directory, filename))
+                    modified_time = file_stat.st_mtime
+                    if LATEST_FILEMODDATE is None or  modified_time > LATEST_FILEMODDATE:
+                        LATEST_FILEMODDATE = modified_time
                     # print(data)
     return data_dict
 
@@ -40,7 +49,7 @@ result_dict = read_yaml_files(directory_path)
 
 if __name__ == '__main__':
     try:
-        player_shops = []
+        player_shops = {'meta': {'latestfilemoddate': None, 'latestfilemoddate_formatted': None}, 'shops': []}
         for shop in result_dict:
             player_shop =  {}
 
@@ -142,7 +151,9 @@ if __name__ == '__main__':
                         player_offers[stock_key]['stock'] = player_stocks[stock_key]
 
             player_shop['offers'] = player_offers
-            player_shops.append(player_shop)
+            player_shops['shops'].append(player_shop)
+            player_shops['meta']['latestfilemoddate'] = LATEST_FILEMODDATE
+            player_shops['meta']['latestfilemoddate_formatted'] = datetime.fromtimestamp(LATEST_FILEMODDATE).strftime('%Y-%m-%d %H:%M:%S')
 
         # Datenausgabe als JSON-Datei
         with open("output.json", "w") as outfile:
