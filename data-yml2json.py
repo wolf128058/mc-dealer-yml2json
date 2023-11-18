@@ -88,7 +88,7 @@ if __name__ == '__main__':
                         player_offer['amount'] = offer_data['amount']
                         player_offer['price'] = offer_data['price']
 
-                        player_offer['discount'] = 0
+                        player_offer['price_discount'] = 0
                         if 'discount' in offer_data and 'amount' in offer_data['discount']:
                             player_offer['price_discount'] = offer_data['discount']['amount']
 
