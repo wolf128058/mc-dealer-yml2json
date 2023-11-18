@@ -87,6 +87,11 @@ if __name__ == '__main__':
                         player_offer['item'] = item_type
                         player_offer['amount'] = offer_data['amount']
                         player_offer['price'] = offer_data['price']
+
+                        player_offer['discount'] = 0
+                        if 'discount' in offer_data and 'amount' in offer_data['discount']:
+                            player_offer['price_discount'] = offer_data['discount']['amount']
+
                         player_offer['unit_price'] = round(offer_data['price'] / offer_data['amount'], 2)
                         player_offer['stock'] = 0
 
