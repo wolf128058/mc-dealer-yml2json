@@ -119,10 +119,14 @@ if __name__ == '__main__':
                         elif 'translate' in json_displayname:
                             item_index = json_displayname['translate']
 
-                    if item_index not in player_stocks and 'amount' in stock:
-                        player_stocks[item_index] = stock['amount']
-                    elif 'amount' in stock:
-                        player_stocks[item_index] += stock['amount']
+                    myamount = 1
+                    if 'amount' in stock:
+                        myamount = stock['amount']
+
+                    if item_index not in player_stocks:
+                        player_stocks[item_index] = myamount
+                    else:
+                        player_stocks[item_index] += myamount
               
                 # Lagerbestände in die Angebote übertragen
                 for stock_key in player_stocks:
