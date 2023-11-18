@@ -127,8 +127,9 @@ if __name__ == '__main__':
             player_shop['offers'] = player_offers
             player_shops.append(player_shop)
 
-        # Datenausgabe als JSON
-        print(json.dumps(player_shops))
+        # Datenausgabe als JSON-Datei
+        with open("output.json", "w") as outfile:
+            outfile.write(json.dumps(player_shops))
 
         # Error Handling (Fehlerausgabe im Fehlerfall)
         pass
