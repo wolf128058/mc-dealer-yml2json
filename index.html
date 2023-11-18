@@ -1,58 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Information</title>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 20px;
-        }
+      body {
+        background-color: #111;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+        border: 1px solid #fff;
+      }
 
-        th {
-            background-color: #f2f2f2;
-        }
+      td,
+      th {
+        border: 1px solid #fff;
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .low-stock {
+        color: red;
+      }
+
+      .shop-info {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .shop-container {
+        margin-bottom: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
 
-<script>
-    function displayShops(shops) {
-        let output = "";
-        shops.forEach(shop => {
-            output += "<h2>" + shop.shop_name + " - " + shop.owner_name + "</h2>";
-            output += "<table>";
-            output += "<tr><th>Item</th><th>Amount</th><th>Price</th><th>Unit Price</th><th>Stock</th></tr>";
-            Object.keys(shop.offers).forEach(item => {
-                const offer = shop.offers[item];
-                output += "<tr>";
-                output += "<td>" + (offer.own_name ? offer.own_name : offer.item) + "</td>";
-                output += "<td>" + offer.amount + "</td>";
-                output += "<td>" + offer.price + "</td>";
-                output += "<td>" + offer.unit_price + "</td>";
-                output += "<td>" + offer.stock + "</td>";
-                output += "</tr>";
+  <body>
+
+    <div id="output-container"></div>
+
+    <script>
+      // Function to fetch and display data
+      async function fetchData() {
+        try {
+          const response = await fetch('/execute-python');
+          if (response.ok) {
+            const jsonData = await response.json();
+            displayData(jsonData);
+          } else {
+            // If fetching fails, try loading from output.json
+            const outputResponse = await fetch('output.json');
+            if (outputResponse.ok) {
+              const jsonOutputData = await outputResponse.json();
+              displayData(jsonOutputData);
+            } else {
+              throw new Error(`Error fetching data. Status: ${outputResponse.status}`);
+            }
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          document
+            .getElementById('output-container')
+            .innerHTML = '<p>Error retrieving data. Please try again.</p>';
+        }
+      }
+
+      // Function to display data
+      function displayData(data) {
+        const outputContainer = document.getElementById('output-container');
+
+        data.forEach(shop => {
+          // Shop Container
+          const shopContainer = document.createElement('div');
+          shopContainer
+            .classList
+            .add('shop-container');
+
+          // Shop Name and Owner Info
+          const shopInfo = document.createElement('div');
+          shopInfo
+            .classList
+            .add('shop-info');
+          shopInfo.textContent = `Shop: ${shop.shop_name} - Owner: ${shop.owner_name}`;
+          shopContainer.appendChild(shopInfo);
+
+          // Table
+          const table = document.createElement('table');
+
+          // Table Header
+          const headerRow = table.insertRow();
+          const headers = ['Item', 'Amount', 'Price', 'Unit Price', 'Stock'];
+          headers.forEach(headerText => {
+            const header = document.createElement('th');
+            header.textContent = headerText;
+            headerRow.appendChild(header);
+          });
+
+          // Items
+          Object
+            .keys(shop.offers)
+            .forEach(itemKey => {
+              const item = shop.offers[itemKey];
+              const row = table.insertRow();
+
+              // Item Name
+              const itemNameCell = row.insertCell();
+              itemNameCell.textContent = item.own_name || item.item;
+
+              // Amount
+              const amountCell = row.insertCell();
+              amountCell.textContent = item.amount;
+
+              // Price
+              const priceCell = row.insertCell();
+              const price = item.price_discount === 0
+                ? item.price
+                : item.price - (item.price * item.price_discount);
+              priceCell.textContent = price;
+
+              // Unit Price
+              const unitPriceCell = row.insertCell();
+              unitPriceCell.textContent = item.unit_price;
+
+              // Stock
+              const stockCell = row.insertCell();
+              stockCell.textContent = item.stock;
+
+              // Apply style for low stock
+              if (item.stock < 5) {
+                row
+                  .classList
+                  .add('low-stock');
+              }
             });
-            output += "</table>";
+
+          shopContainer.appendChild(table);
+          outputContainer.appendChild(shopContainer);
         });
-        document.body.innerHTML = output;
-    }
+      }
 
-    // Lese den JSON-Array aus der Datei aus
-    fetch('output.json')
-        .then(response => response.json())
-        .then(data => displayShops(data))
-        .catch(error => console.error('Error fetching JSON:', error));
-</script>
-
-</body>
+      // Execute fetchData when the page loads
+      fetchData();
+    </script>
+  </body>
 </html>
