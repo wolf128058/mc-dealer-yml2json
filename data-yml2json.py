@@ -25,7 +25,7 @@ def read_yaml_files(directory):
     data_dict = {}
     for filename in os.listdir(directory):
         if filename.endswith(".yml"):
-            with open(os.path.join(directory, filename), "r") as file:
+            with open(os.path.join(directory, filename), "r", encoding="utf-8") as file:
                 data = yaml.safe_load(file)
                 # Assuming 'ownerUUID' exists in each YAML file
                 uuid = data.get("ownerUUID")
