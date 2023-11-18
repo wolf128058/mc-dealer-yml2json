@@ -75,6 +75,10 @@ if __name__ == '__main__':
                                 own_name = offer_data['item']['meta']['display-name']
                                 item_index = own_name
 
+                        elif item_type == 'ENCHANTED_BOOK':
+                            item_type = 'ENCHANTED_BOOK_' + list(offer_data['item']['meta']['stored-enchants'])[0]
+                            item_index = item_type
+
                         if 'meta' in offer_data['item'] and 'display-name' in offer_data['item']['meta']:
                             json_displayname = json.loads( offer_data['item']['meta']['display-name'])
                             if 'extra' in json_displayname:
@@ -111,6 +115,10 @@ if __name__ == '__main__':
                         else:
                             own_name = stock['item']['display-name']
                             item_index = own_name
+
+                    elif item_type == 'ENCHANTED_BOOK':
+                            item_type = 'ENCHANTED_BOOK_' + list(stock['meta']['stored-enchants'])[0]
+                            item_index = item_type
 
                     if 'meta' in stock and 'display-name' in stock['meta']:
                         json_displayname = json.loads(stock['meta']['display-name'])
