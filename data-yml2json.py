@@ -3,7 +3,7 @@
 """
 Minecraft Händler-YML zu JSON-Konverter
 
-Autor: VollmondHeuler
+Autor: VollmondHeuler, CaptainGummiball
 Lizenz: CC-BY 4.0
 
 Beschreibung:
