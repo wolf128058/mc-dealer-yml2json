@@ -67,6 +67,8 @@ if __name__ == '__main__':
 
             # Angebote des Händlers
             player_offers = {}
+            player_demands = {}
+            
             if 'items_for_sale' in result_dict[shop]:
                 for offer in result_dict[shop]['items_for_sale']:
                     offer_data = result_dict[shop]['items_for_sale'][offer]
@@ -109,6 +111,19 @@ if __name__ == '__main__':
                         player_offer['stock'] = 0
 
                         player_offers[item_index] = player_offer
+                    
+                    elif offer_data['mode'] == 'BUY':
+                    # Nachfragen des Händlers
+                        player_demand = {}
+
+                        item_type = offer_data['item']['type']
+                        player_demand['item'] = item_type
+                        player_demand['own_name'] = None
+                        player_demand['amount'] = offer_data['amount']
+                        player_demand['price'] = offer_data['price']
+
+                        player_demands[item_index] = player_demand
+                        item_index = item_type
 
             # Lagerbestände
             player_stocks = {}
@@ -151,6 +166,7 @@ if __name__ == '__main__':
                         player_offers[stock_key]['stock'] = player_stocks[stock_key]
 
             player_shop['offers'] = player_offers
+            player_shop['demands'] = player_demands
             player_shops['shops'].append(player_shop)
             player_shops['meta']['latestfilemoddate'] = LATEST_FILEMODDATE
             player_shops['meta']['latestfilemoddate_formatted'] = datetime.fromtimestamp(LATEST_FILEMODDATE).strftime('%Y-%m-%d %H:%M:%S')
