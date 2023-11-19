@@ -59,6 +59,10 @@ tr th:not(:first-child) {
     width: 12.5%;
 }
 
+tr td:not(:first-child) {
+    text-align: right
+}
+
 .low-stock {
     color: red;
 }
