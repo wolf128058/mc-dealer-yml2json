@@ -15,10 +15,10 @@ body {
     height: auto;
 }
 
-#latestfilemoddate {
-    font-size: small;
-    color: gray;
-    margin-top: 5px;
+#output-container-metadata {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
 }
 
 .shop-container {

@@ -23,15 +23,15 @@
             const response = await fetch('output.json');
             const data = await response.json();
             displayData(data.shops);
-            displayLatestFileModDate(data.latestfilemoddate_formatted);
+            displayLatestFileModDate(data.meta.latestfilemoddate_formatted);
         } catch (error) {
             console.error('Fehler beim Abrufen der Daten:', error);
         }
     }
 
     function displayLatestFileModDate(date) {
-        const latestFileModDateElement = document.getElementById('latestfilemoddate');
-        latestFileModDateElement.textContent = `Letzte Aktualisierung: ${date}`;
+        const latestFileModDateElement = document.getElementById('output-container-metadata');
+        latestFileModDateElement.textContent = `Latest Data: ${date}`;
     }
 
     async function displayData(shops) {
