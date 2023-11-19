@@ -140,7 +140,8 @@
           itemImageSpan.classList.add('item-image');
 
           const itemImage = document.createElement('img');
-          const imagePath = `assets/items/${item.item.toLowerCase()}.png`;
+          const imagePath = `assets/items/${item.item.toLowerCase()}.png`; // Path to icons
+          const dummyImagePath = 'assets/items/air.png'; // Path to dummy icon
 
           // Check if the icon exists
           fetch(imagePath).then(response => {
