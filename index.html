@@ -82,7 +82,12 @@
     async function setupTable(table, items, isBuyTable) {
         // Tabellenkopf
         const headerRow = table.insertRow();
-        const headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Bestand'];
+        let headers = [];
+        if (isBuyTable) {
+            headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Nachfrage'];
+        } else {
+            headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Bestand']
+        }
         headers.forEach(headerText => {
             const header = document.createElement('th');
             header.textContent = headerText;
