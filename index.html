@@ -171,9 +171,19 @@
               if (response.ok) {
                 itemImage.src = imagePath;
                 itemImage.alt = translatedName;
-                itemImageSpan.appendChild(itemImage);
+              } else {
+                // Image not found, use dummy icon
+                itemImage.src = dummyImagePath;
+                itemImage.alt = 'Dummy Image';
               }
-            }).catch(error => console.error('Fehler beim Laden des Bildes:', error));
+            }).catch(error => {
+              console.error('Error on loading item image:', error);
+              // If there is an error, also use the dummy icon
+              itemImage.src = dummyImagePath;
+              itemImage.alt = 'Dummy Image';
+            }). finally(() => {
+              itemImageSpan.appendChild(itemImage);
+            });
 
           // adding text
           const itemNameText = document.createElement('span');
