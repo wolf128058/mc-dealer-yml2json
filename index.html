@@ -25,21 +25,20 @@
             const response = await fetch('assets/config.json');
             return await response.json();
         } catch (error) {
-            console.error('Fehler beim Abrufen der Konfigurationsdaten:', error);
+            console.error('Error retrieving configuration data:', error);
             return {};
         }
     }
-	
+
     async function fetchData() {
             try {
                 config = await fetchConfig();
-                // Hier kann der Pfad zur output.json-Datei eingefügt werden
                 const response = await fetch('output.json');
                 const data = await response.json();
                 displayData(data.shops);
                 displayLatestFileModDate(data.meta.latestfilemoddate_formatted);
             } catch (error) {
-                console.error('Fehler beim Abrufen der Daten:', error);
+                console.error('Error retrieving data:', error);
             }
         }
 
@@ -162,11 +161,11 @@
             itemNameCell.appendChild(itemImageSpan);
             itemNameCell.appendChild(itemNameText);
 
-            // Menge
+            // quantity
             const amountCell = row.insertCell();
             amountCell.textContent = item.amount;
 
-            // Preis
+            // price
             const priceCell = row.insertCell();
             let price = item.price
             if (typeof item.price_discount !== 'undefined') {
@@ -174,11 +173,11 @@
             }
             priceCell.textContent = config.currencySymbolPosition === 'before' ? `${config.currencySymbol}${price.toFixed(2)}` : `${price.toFixed(2)}${config.currencySymbol}`;
 
-            // Stückpreis
+            // price per unit
             const unitPriceCell = row.insertCell();
             unitPriceCell.textContent = config.currencySymbolPosition === 'before' ? `${config.currencySymbol}${item.unit_price.toFixed(2)}` : `${item.unit_price.toFixed(2)}${config.currencySymbol}`;
 
-            // Bestand/Nachfrage
+            // stock or demand
             const stockCell = row.insertCell();
             if (isBuyTable) {
                 stockCell.textContent = item.buy_limit;
@@ -197,7 +196,7 @@
             translations = await response.json();
             // console.log(translations)
         } catch (error) {
-            console.error('Fehler beim Lesen der Übersetzungsliste:', error);
+            console.error('Error reading translation list:', error);
             translations = {};
         }
     }
