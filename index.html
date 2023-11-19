@@ -64,7 +64,12 @@
                 if(Object.keys(shop.offers).length > 0) {
                     const sellTableContainer = document.createElement('div');
                     sellTableContainer.classList.add('table-container');
-                    sellTableContainer.innerHTML = '<h2>Selling</h2>';
+
+                    const sellTableTitle = document.createElement('h2');
+                    sellTableTitle.classList.add('selling-title');
+                    sellTableTitle.innerHTML = await getTranslation('Selling');
+                    sellTableContainer.appendChild(sellTableTitle);
+
                     const sellTable = document.createElement('table');
                     await setupTable(sellTable, shop.offers, false);
                     sellTableContainer.appendChild(sellTable);
@@ -75,7 +80,12 @@
                 if(Object.keys(shop.demands).length > 0) {
                     const buyTableContainer = document.createElement('div');
                     buyTableContainer.classList.add('table-container');
-                    buyTableContainer.innerHTML = '<h2>Buying</h2>';
+
+                    const buyTableTitle = document.createElement('h2');
+                    buyTableTitle.classList.add('buying-title');
+                    buyTableTitle.innerHTML = await getTranslation('Buying');
+                    buyTableContainer.appendChild(buyTableTitle);
+
                     const buyTable = document.createElement('table');
                     await setupTable(buyTable, shop.demands, true);
                     buyTableContainer.appendChild(buyTable);
