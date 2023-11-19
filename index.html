@@ -17,9 +17,22 @@
     <div id="output-container"></div>
 
     <script>
+    let config = {};
     let translations = {};
+
+    async function fetchConfig() {
+        try {
+            const response = await fetch('assets/config.json');
+            return await response.json();
+        } catch (error) {
+            console.error('Fehler beim Abrufen der Konfigurationsdaten:', error);
+            return {};
+        }
+    }
+	
     async function fetchData() {
             try {
+                config = await fetchConfig();
                 // Hier kann der Pfad zur output.json-Datei eingefügt werden
                 const response = await fetch('output.json');
                 const data = await response.json();
@@ -159,11 +172,11 @@
             if (typeof item.price_discount !== 'undefined') {
                 price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
             }
-            priceCell.textContent = price.toFixed(2);
+            priceCell.textContent = config.currencySymbolPosition === 'before' ? `${config.currencySymbol}${price.toFixed(2)}` : `${price.toFixed(2)}${config.currencySymbol}`;
 
             // Stückpreis
             const unitPriceCell = row.insertCell();
-            unitPriceCell.textContent = item.unit_price.toFixed(2);
+            unitPriceCell.textContent = config.currencySymbolPosition === 'before' ? `${config.currencySymbol}${item.unit_price.toFixed(2)}` : `${item.unit_price.toFixed(2)}${config.currencySymbol}`;
 
             // Bestand/Nachfrage
             const stockCell = row.insertCell();
