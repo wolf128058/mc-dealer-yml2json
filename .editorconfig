@@ -12,7 +12,7 @@ end_of_line = lf
 indent_style = space
 indent_size = 4
 
-# Indentation for Config/Assets
-[{config.json, assets/*.json}]
+# Indentation for Config/Assets/HTML
+[{config.json, assets/*.json, *.html}]
 indent_style = space
 indent_size = 2
