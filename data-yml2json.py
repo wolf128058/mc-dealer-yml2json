@@ -121,6 +121,7 @@ if __name__ == '__main__':
                         player_demand['own_name'] = None
                         player_demand['amount'] = offer_data['amount']
                         player_demand['price'] = offer_data['price']
+                        player_demand['unit_price'] = round(offer_data['price'] / offer_data['amount'], 2)
 
                         player_demands[item_index] = player_demand
                         item_index = item_type
