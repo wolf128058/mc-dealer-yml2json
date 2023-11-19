@@ -97,32 +97,34 @@
         // Elemente
         for (const itemKey in items) {
             const item = items[itemKey];
-            if ((isBuyTable && item.price < 0) || (!isBuyTable && item.price >= 0)) {
-                const row = table.insertRow();
+            const row = table.insertRow();
 
-                // Elementname
-                const itemNameCell = row.insertCell();
-                const translatedName = await getTranslation(item.own_name || item.item);
-                itemNameCell.textContent = translatedName;
+            // Elementname
+            const itemNameCell = row.insertCell();
+            const translatedName = await getTranslation(item.own_name || item.item);
+            itemNameCell.textContent = translatedName;
 
-                // Menge
-                const amountCell = row.insertCell();
-                amountCell.textContent = item.amount;
+            // Menge
+            const amountCell = row.insertCell();
+            amountCell.textContent = item.amount;
 
-                // Preis
-                const priceCell = row.insertCell();
-                let price = item.price
-                if (typeof item.price_discount !== 'undefined') {
-                    price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
-                }
-                priceCell.textContent = price;
+            // Preis
+            const priceCell = row.insertCell();
+            let price = item.price
+            if (typeof item.price_discount !== 'undefined') {
+                price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
+            }
+            priceCell.textContent = price;
 
-                // Stückpreis
-                const unitPriceCell = row.insertCell();
-                unitPriceCell.textContent = item.unit_price;
+            // Stückpreis
+            const unitPriceCell = row.insertCell();
+            unitPriceCell.textContent = item.unit_price;
 
-                // Bestand
-                const stockCell = row.insertCell();
+            // Bestand/Nachfrage
+            const stockCell = row.insertCell();
+            if (isBuyTable) {
+                stockCell.textContent = item.buy_limit;
+            } else {
                 stockCell.textContent = item.stock === 0 ? 'Sold out' : item.stock;
                 if (item.stock < 5) {
                     stockCell.classList.add('low-stock');
