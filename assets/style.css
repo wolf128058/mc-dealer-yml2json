@@ -38,8 +38,20 @@ body {
 }
 
 .shop-info {
-    font-size: 1.2em;
     margin-bottom: 10px;
+}
+
+.shop-info .shop-name {
+    color: #ffb046;
+    display: block;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.shop-info .shop-owner {
+	color: #808080;
 }
 
 .table-container {
