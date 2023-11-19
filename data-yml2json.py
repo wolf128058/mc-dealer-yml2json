@@ -35,6 +35,8 @@ def read_yaml_files(directory):
                 # Assuming 'ownerUUID' exists in each YAML file
                 uuid = data.get("ownerUUID")
                 if uuid:
+                    base_filename = os.path.splitext(os.path.basename(filename))[0]
+                    data['shop_uuid'] = base_filename
                     data_dict[uuid] = data
                     file_stat = os.stat(os.path.join(directory, filename))
                     modified_time = file_stat.st_mtime
@@ -54,6 +56,7 @@ if __name__ == '__main__':
             player_shop =  {}
 
             # Meta-Daten des Shops
+            player_shop['shop_uuid'] = result_dict[shop]['shop_uuid']
             player_shop['owner_uuid'] = result_dict[shop]['ownerUUID']
             player_shop['owner_name'] = result_dict[shop]['ownerName']
             player_shop['shop_name'] = clean_minecraft_string(result_dict[shop]['entity']['name'])
