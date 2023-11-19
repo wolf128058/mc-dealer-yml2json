@@ -62,7 +62,7 @@
                 buyTableContainer.classList.add('table-container');
                 buyTableContainer.innerHTML = '<h2>Buying</h2>';
                 const buyTable = document.createElement('table');
-                await setupTable(buyTable, shop.demands, true);
+                await setupTable(buyTable, shop.demands, false);
                 buyTableContainer.appendChild(buyTable);
 
                 shopContainer.appendChild(sellTableContainer);
