@@ -111,7 +111,7 @@
 
                 // Bestand
                 const stockCell = row.insertCell();
-                stockCell.textContent = item.stock === 0 ? 'Ausverkauft' : item.stock;
+                stockCell.textContent = item.stock === 0 ? 'Sold out' : item.stock;
                 if (item.stock < 5) {
                     stockCell.classList.add('low-stock');
                 }
