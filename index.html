@@ -114,11 +114,11 @@
             if (typeof item.price_discount !== 'undefined') {
                 price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
             }
-            priceCell.textContent = price;
+            priceCell.textContent = price.toFixed(2);
 
             // Stückpreis
             const unitPriceCell = row.insertCell();
-            unitPriceCell.textContent = item.unit_price;
+            unitPriceCell.textContent = item.unit_price.toFixed(2);
 
             // Bestand/Nachfrage
             const stockCell = row.insertCell();
