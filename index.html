@@ -166,7 +166,7 @@
 
           // price
           const priceCell = row.insertCell();
-          let price = item.price
+          let price = item.price;
           if (typeof item.price_discount !== 'undefined') {
             price = item.price_discount === 0
               ? item.price
