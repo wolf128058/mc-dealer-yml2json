@@ -14,6 +14,8 @@
       <img src="assets/logo.png" alt="Logo">
     </div>
     <div id="output-container-metadata"></div>
+    <div id="output-container-indextable"></div>
+    <div style="clear: both"></div>
     <div id="output-container"></div>
 
     <script>
@@ -72,9 +74,34 @@
 
       async function displayData(shops) {
         const outputContainer = document.getElementById('output-container');
+        const indexContainer = document.getElementById('output-container-indextable');
+        const indexHeadline = document.createElement('h2');
+        indexHeadline.textContent = 'Shops';
+        indexContainer.append(indexHeadline)
 
         if (Array.isArray(shops)) {
           for (const shop of shops) {
+            //Entry in Index-Table
+            const indexEntry = document.createElement('div');
+            indexEntry.classList.add('shop-index-entry');
+
+            const indexLink = document.createElement('a');
+            indexLink.setAttribute('href', '#' + shop.shop_uuid);
+            
+
+            const indexName = document.createElement('span');
+            indexName.classList.add('index-shop-name');
+            indexName.textContent = shop.shop_name;
+            indexLink.appendChild(indexName)
+
+            const indexOwner = document.createElement('span');
+            indexOwner.classList.add('index-shop-owner');
+            indexOwner.textContent = `by ${shop.owner_name}`;
+            indexLink.appendChild(indexOwner)
+            
+            indexEntry.appendChild(indexLink)
+            indexContainer.appendChild(indexEntry)
+
             // Shop-Container
             const shopContainer = document.createElement('div');
             shopContainer.classList.add('shop-container');
