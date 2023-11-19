@@ -60,14 +60,14 @@
             const shopInfo = document.createElement('div');
             shopInfo.classList.add('shop-info');
 
-            shopName = document.createElement('span');
+            const shopName = document.createElement('span');
             shopName.classList.add('shop-name');
             shopName.textContent = shop.shop_name;
             shopInfo.appendChild(shopName);
 
-            shopOwner = document.createElement('span');
+            const shopOwner = document.createElement('span');
             shopOwner.classList.add('shop-owner');
-            shopOwner.textContent = `by ${shop.owner_name}`;;
+            shopOwner.textContent = `by ${shop.owner_name}`;
             shopInfo.appendChild(shopOwner);
 
             shopContainer.appendChild(shopInfo);
