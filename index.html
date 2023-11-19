@@ -112,8 +112,32 @@
 
             // Elementname
             const itemNameCell = row.insertCell();
+
+           // Bild hinzufügen, wenn vorhanden
+           const itemImageSpan = document.createElement('span');
+           itemImageSpan.classList.add('item-image');
+
+           const itemImage = document.createElement('img');
+           const imagePath = `assets/items/${item.item.toLowerCase()}.png`;
+        
+            // Überprüfen, ob das Bild vorhanden ist
+            fetch(imagePath).then(response => {
+                if (response.ok) {
+                    itemImage.src = imagePath;
+                    itemImage.alt = translatedName;
+                    itemImageSpan.appendChild(itemImage);
+                }
+            })
+            .catch(error => console.error('Fehler beim Laden des Bildes:', error));
+
+            // Text hinzufügen
+            const itemNameText = document.createElement('span');
             const translatedName = await getTranslation(item.own_name || item.item);
-            itemNameCell.textContent = translatedName;
+            itemNameText.classList.add('item-name');
+            itemNameText.textContent = translatedName;
+
+            itemNameCell.appendChild(itemImageSpan);
+            itemNameCell.appendChild(itemNameText);
 
             // Menge
             const amountCell = row.insertCell();
