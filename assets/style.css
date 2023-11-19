@@ -12,7 +12,7 @@ body {
     background-color: #111;
     color: #eee;
     margin: 0;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 #logo {
@@ -32,19 +32,19 @@ body {
 
 #output-container-metadata {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: .75rem;
     text-align: right;
 }
 
 .shop-container {
     border: 2px solid #333;
-    border-radius: 10px;
-    margin-top: 20px;
-    padding: 10px;
+    border-radius: .75rem;
+    margin-top: 1.25rem;
+    padding: .75rem;
 }
 
 .shop-info {
-    margin-bottom: 10px;
+    margin-bottom: .75rem;
 }
 
 .shop-info .shop-name {
@@ -53,7 +53,7 @@ body {
     font-family: 'Minecraftia', sans-serif;
     font-size: 24px;
     font-weight: bold;
-    line-height: 24px;
+    line-height: 1.5rem;
 }
 
 .shop-info .shop-owner {
@@ -67,23 +67,23 @@ body {
     font-family: 'Minecraftia', sans-serif;
     font-size: 22px;
     font-weight: bold;
-    line-height: 24px;
+    line-height: 1.5rem;
 }
 
 .table-container {
-    margin-top: 10px;
+    margin-top: .75rem;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: .75rem;
 }
 
 th,
 td {
     border: 1px solid #444;
-    padding: 8px;
+    padding: .5rem;
     text-align: left;
 }
 
@@ -92,8 +92,8 @@ th {
     color: #eee;
     font-family: 'Minecraftia', sans-serif;
     font-size: 16px;
-    line-height: 12px;
-    padding-left: 12px;
+    line-height: .75rem;
+    padding-left: .75rem;
 }
 
 tr th:not(:first-child) {
