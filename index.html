@@ -50,23 +50,27 @@
                 shopContainer.appendChild(shopInfo);
 
                 // Verkaufstabelle
-                const sellTableContainer = document.createElement('div');
-                sellTableContainer.classList.add('table-container');
-                sellTableContainer.innerHTML = '<h2>Selling</h2>';
-                const sellTable = document.createElement('table');
-                await setupTable(sellTable, shop.offers, false);
-                sellTableContainer.appendChild(sellTable);
+                if(Object.keys(shop.offers).length > 0) {
+                    const sellTableContainer = document.createElement('div');
+                    sellTableContainer.classList.add('table-container');
+                    sellTableContainer.innerHTML = '<h2>Selling</h2>';
+                    const sellTable = document.createElement('table');
+                    await setupTable(sellTable, shop.offers, false);
+                    sellTableContainer.appendChild(sellTable);
+                    shopContainer.appendChild(sellTableContainer);
+                }
 
                 // Ankaufstabelle
-                const buyTableContainer = document.createElement('div');
-                buyTableContainer.classList.add('table-container');
-                buyTableContainer.innerHTML = '<h2>Buying</h2>';
-                const buyTable = document.createElement('table');
-                await setupTable(buyTable, shop.demands, false);
-                buyTableContainer.appendChild(buyTable);
+                if(Object.keys(shop.demands).length > 0) {
+                    const buyTableContainer = document.createElement('div');
+                    buyTableContainer.classList.add('table-container');
+                    buyTableContainer.innerHTML = '<h2>Buying</h2>';
+                    const buyTable = document.createElement('table');
+                    await setupTable(buyTable, shop.demands, false);
+                    buyTableContainer.appendChild(buyTable);
+                    shopContainer.appendChild(buyTableContainer);
+                }
 
-                shopContainer.appendChild(sellTableContainer);
-                shopContainer.appendChild(buyTableContainer);
                 outputContainer.appendChild(shopContainer);
             }
         } else {
