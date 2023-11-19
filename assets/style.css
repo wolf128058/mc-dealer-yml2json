@@ -24,6 +24,12 @@ body {
     height: auto;
 }
 
+.item-image {
+    max-width: 30px;
+    max-height: 30px;
+    padding-left: 20px;
+}
+
 #output-container-metadata {
     width: 100%;
     margin-bottom: 10px;
@@ -51,7 +57,17 @@ body {
 }
 
 .shop-info .shop-owner {
-	color: #808080;
+    color: #808080;
+}
+
+.selling-title,
+.buying-title {
+    color: #ffffff;
+    display: block;
+    font-family: 'Minecraftia', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 24px;
 }
 
 .table-container {
