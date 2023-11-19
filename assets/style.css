@@ -43,9 +43,10 @@ body {
 }
 
 #output-container-metadata {
-    width: 100%;
-    margin-bottom: .75rem;
+    font-size: 14px;
+    margin-top: 1rem;
     text-align: right;
+    width: 100%;
 }
 
 #output-container-indextable {
