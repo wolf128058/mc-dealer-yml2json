@@ -37,7 +37,7 @@ def read_yaml_files(directory):
                 if uuid:
                     base_filename = os.path.splitext(os.path.basename(filename))[0]
                     data['shop_uuid'] = base_filename
-                    data_dict[uuid] = data
+                    data_dict[base_filename] = data
                     file_stat = os.stat(os.path.join(directory, filename))
                     modified_time = file_stat.st_mtime
                     if LATEST_FILEMODDATE is None or  modified_time > LATEST_FILEMODDATE:
