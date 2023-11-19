@@ -57,6 +57,7 @@ if __name__ == '__main__':
             player_shop['owner_uuid'] = result_dict[shop]['ownerUUID']
             player_shop['owner_name'] = result_dict[shop]['ownerName']
             player_shop['shop_name'] = clean_minecraft_string(result_dict[shop]['entity']['name'])
+            player_shop['shop_name'] = re.sub(r"\[.*?\]", "", player_shop['shop_name'] )
             player_shop['npc_profession'] =result_dict[shop]['entity']['profession']
             player_shop['location'] = {
                 'world':  result_dict[shop]['entity']['location']['world'],
