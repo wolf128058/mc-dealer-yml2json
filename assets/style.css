@@ -25,9 +25,21 @@ body {
 }
 
 .item-image {
-    max-width: 30px;
-    max-height: 30px;
-    padding-left: 20px;
+    display: block;
+    float: left;
+    height: 1rem;
+    padding-right: .5rem;
+    width: 1rem;
+}
+
+.item-image img {
+    max-width: 1rem;
+    max-height: 1rem;
+}
+
+.item-name {
+    display: block;
+    float: left;
 }
 
 #output-container-metadata {
