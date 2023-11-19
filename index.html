@@ -30,6 +30,29 @@
         }
       }
 
+      async function loadTranslations() {
+        try {
+          const response = await fetch('assets/translations.json');
+          translations = await response.json();
+        } catch (error) {
+          console.error('Error reading translation list:', error);
+          translations = {};
+        }
+      }
+
+      // Translation
+      async function getTranslation(text) {
+        if (Object.keys(translations).length === 0) {
+          await loadTranslations();
+        }
+
+        if (translations.hasOwnProperty(text)) {
+          return translations[text];
+        } else {
+          return text;
+        }
+      }
+
       async function fetchData() {
         try {
           config = await fetchConfig();
@@ -195,30 +218,6 @@
               stockCell.classList.add('low-stock');
             }
           }
-        }
-      }
-
-      async function loadTranslations() {
-        try {
-          const response = await fetch('assets/translations.json');
-          translations = await response.json();
-          // console.log(translations)
-        } catch (error) {
-          console.error('Error reading translation list:', error);
-          translations = {};
-        }
-      }
-
-      // Funktion zur Übersetzung
-      async function getTranslation(text) {
-        if (Object.keys(translations).length === 0) {
-          await loadTranslations();
-        }
-
-        if (translations.hasOwnProperty(text)) {
-          return translations[text];
-        } else {
-          return text;
         }
       }
 
