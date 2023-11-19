@@ -107,13 +107,13 @@
             outputContainer.appendChild(shopContainer);
           }
         } else {
-          console.error('Ungültiges Datenformat:', shops);
+          console.error('Invalid data format:', shops);
         }
       }
 
       // Table setup function
       async function setupTable(table, items, isBuyTable) {
-        // Tabellenkopf
+        // Table header
         const headerRow = table.insertRow();
         let headers = [];
         if (isBuyTable) {
