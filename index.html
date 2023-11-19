@@ -17,110 +17,117 @@
     <div id="output-container"></div>
 
     <script>
-      // Function to fetch and display data
-      async function fetchData() {
+   async function fetchData() {
         try {
-          const response = await fetch('/execute-python');
-          if (response.ok) {
-            const jsonData = await response.json();
-            displayData(jsonData);
-          } else {
-            // If fetching fails, try loading from output.json
-            const outputResponse = await fetch('output.json');
-            if (outputResponse.ok) {
-              const jsonOutputData = await outputResponse.json();
-              displayData(jsonOutputData);
-            } else {
-              throw new Error(`Error fetching data. Status: ${outputResponse.status}`);
-            }
-          }
+            // Hier kann der Pfad zur output.json-Datei eingefügt werden
+            const response = await fetch('output.json');
+            const data = await response.json();
+            displayData(data.shops);
+            displayLatestFileModDate(data.latestfilemoddate_formatted);
         } catch (error) {
-          console.error('Error:', error);
-          document
-            .getElementById('output-container')
-            .innerHTML = '<p>Error retrieving data. Please try again.</p>';
+            console.error('Fehler beim Abrufen der Daten:', error);
         }
-      }
+    }
 
-      // Function to display data
-      function displayData(data) {
+    function displayLatestFileModDate(date) {
+        const latestFileModDateElement = document.getElementById('latestfilemoddate');
+        latestFileModDateElement.textContent = `Letzte Aktualisierung: ${date}`;
+    }
+
+    async function displayData(shops) {
         const outputContainer = document.getElementById('output-container');
-        const metadataContainer = document.getElementById('output-container-metadata');
 
-        metadataContainer.textContent = data.meta.latestfilemoddate_formatted
+        if (Array.isArray(shops)) {
+            for (const shop of shops) {
+                // Shop-Container
+                const shopContainer = document.createElement('div');
+                shopContainer.classList.add('shop-container');
 
-        data.shops.forEach(shop => {
-          // Shop Container
-          const shopContainer = document.createElement('div');
-          shopContainer
-            .classList
-            .add('shop-container');
+                // Shop-Name und Besitzerinformationen
+                const shopInfo = document.createElement('div');
+                shopInfo.classList.add('shop-info');
+                shopInfo.textContent = `Shop: ${shop.shop_name} - Owner: ${shop.owner_name}`;
+                shopContainer.appendChild(shopInfo);
 
-          // Shop Name and Owner Info
-          const shopInfo = document.createElement('div');
-          shopInfo
-            .classList
-            .add('shop-info');
-          shopInfo.textContent = `Shop: ${shop.shop_name} - Owner: ${shop.owner_name}`;
-          shopContainer.appendChild(shopInfo);
+                // Verkaufstabelle
+                const sellTableContainer = document.createElement('div');
+                sellTableContainer.classList.add('table-container');
+                sellTableContainer.innerHTML = '<h2>Selling</h2>';
+                const sellTable = document.createElement('table');
+                await setupTable(sellTable, shop.offers, false);
+                sellTableContainer.appendChild(sellTable);
 
-          // Table
-          const table = document.createElement('table');
+                // Ankaufstabelle
+                const buyTableContainer = document.createElement('div');
+                buyTableContainer.classList.add('table-container');
+                buyTableContainer.innerHTML = '<h2>Buying</h2>';
+                const buyTable = document.createElement('table');
+                await setupTable(buyTable, shop.offers, true);
+                buyTableContainer.appendChild(buyTable);
 
-          // Table Header
-          const headerRow = table.insertRow();
-          const headers = ['Item', 'Amount', 'Price', 'Unit Price', 'Stock'];
-          headers.forEach(headerText => {
+                shopContainer.appendChild(sellTableContainer);
+                shopContainer.appendChild(buyTableContainer);
+                outputContainer.appendChild(shopContainer);
+            }
+        } else {
+            console.error('Ungültiges Datenformat:', shops);
+        }
+    }
+	
+    // Funktion zum Einrichten der Tabelle
+    async function setupTable(table, items, isBuyTable) {
+        // Tabellenkopf
+        const headerRow = table.insertRow();
+        const headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Bestand'];
+        headers.forEach(headerText => {
             const header = document.createElement('th');
             header.textContent = headerText;
             headerRow.appendChild(header);
-          });
-
-          // Items
-          Object
-            .keys(shop.offers)
-            .forEach(itemKey => {
-              const item = shop.offers[itemKey];
-              const row = table.insertRow();
-
-              // Item Name
-              const itemNameCell = row.insertCell();
-              itemNameCell.textContent = item.own_name || item.item;
-
-              // Amount
-              const amountCell = row.insertCell();
-              amountCell.textContent = item.amount;
-
-              // Price
-              const priceCell = row.insertCell();
-              const price = item.price_discount === 0
-                ? item.price
-                : item.price - (item.price * item.price_discount);
-              priceCell.textContent = price;
-
-              // Unit Price
-              const unitPriceCell = row.insertCell();
-              unitPriceCell.textContent = item.unit_price;
-
-              // Stock
-              const stockCell = row.insertCell();
-              stockCell.textContent = item.stock;
-
-              // Apply style for low stock
-              if (item.stock < 5) {
-                row
-                  .classList
-                  .add('low-stock');
-              }
-            });
-
-          shopContainer.appendChild(table);
-          outputContainer.appendChild(shopContainer);
         });
-      }
 
-      // Execute fetchData when the page loads
-      fetchData();
+        // Elemente
+        for (const itemKey in items) {
+            const item = items[itemKey];
+            if ((isBuyTable && item.price < 0) || (!isBuyTable && item.price >= 0)) {
+                const row = table.insertRow();
+
+                // Elementname
+                const itemNameCell = row.insertCell();
+                const translatedName = await getTranslation(item.own_name || item.item);
+                itemNameCell.textContent = translatedName;
+
+                // Menge
+                const amountCell = row.insertCell();
+                amountCell.textContent = item.amount;
+
+                // Preis
+                const priceCell = row.insertCell();
+                const price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
+                priceCell.textContent = price;
+
+                // Stückpreis
+                const unitPriceCell = row.insertCell();
+                unitPriceCell.textContent = item.unit_price;
+
+                // Bestand
+                const stockCell = row.insertCell();
+                stockCell.textContent = item.stock === 0 ? 'Ausverkauft' : item.stock;
+                if (item.stock < 5) {
+                    stockCell.classList.add('low-stock');
+                }
+            }
+        }
+    }
+
+    // Funktion zur Übersetzung
+    async function getTranslation(text) {
+        // Hier kann die Logik für die Übersetzung implementiert werden
+        // Beispiel: Text wird direkt zurückgegeben (kann durch ein API-Aufruf ersetzt werden)
+        return text;
+    }
+
+    // fetchData bei Seitenladung ausführen
+    fetchData();
     </script>
   </body>
 </html>
