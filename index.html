@@ -106,7 +106,10 @@
 
                 // Preis
                 const priceCell = row.insertCell();
-                const price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
+                let price = item.price
+                if (typeof item.price_discount !== 'undefined') {
+                    price = item.price_discount === 0 ? item.price : item.price - (item.price * (item.price_discount / 100));
+                }
                 priceCell.textContent = price;
 
                 // Stückpreis
