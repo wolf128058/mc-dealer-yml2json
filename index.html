@@ -56,7 +56,7 @@
                 const shopContainer = document.createElement('div');
                 shopContainer.classList.add('shop-container');
 
-                // Shop-Name und Besitzerinformationen
+                // Shopname and information about owner
                 const shopInfo = document.createElement('div');
                 shopInfo.classList.add('shop-info');
 
@@ -72,7 +72,7 @@
 
                 shopContainer.appendChild(shopInfo);
 
-                // Verkaufstabelle
+                // Sales table
                 if(Object.keys(shop.offers).length > 0) {
                     const sellTableContainer = document.createElement('div');
                     sellTableContainer.classList.add('table-container');
@@ -88,7 +88,7 @@
                     shopContainer.appendChild(sellTableContainer);
                 }
 
-                // Ankaufstabelle
+                // Purchase table
                 if(Object.keys(shop.demands).length > 0) {
                     const buyTableContainer = document.createElement('div');
                     buyTableContainer.classList.add('table-container');
@@ -111,7 +111,7 @@
         }
     }
 	
-    // Funktion zum Einrichten der Tabelle
+    // Table setup function
     async function setupTable(table, items, isBuyTable) {
         // Tabellenkopf
         const headerRow = table.insertRow();
@@ -127,22 +127,22 @@
             headerRow.appendChild(header);
         });
 
-        // Elemente
+        // Items
         for (const itemKey in items) {
             const item = items[itemKey];
             const row = table.insertRow();
 
-            // Elementname
+            // Item Name
             const itemNameCell = row.insertCell();
 
-           // Bild hinzufügen, wenn vorhanden
+           // Adding Item Icon
            const itemImageSpan = document.createElement('span');
            itemImageSpan.classList.add('item-image');
 
            const itemImage = document.createElement('img');
            const imagePath = `assets/items/${item.item.toLowerCase()}.png`;
         
-            // Überprüfen, ob das Bild vorhanden ist
+            // Check if the icon exists
             fetch(imagePath).then(response => {
                 if (response.ok) {
                     itemImage.src = imagePath;
@@ -152,7 +152,7 @@
             })
             .catch(error => console.error('Fehler beim Laden des Bildes:', error));
 
-            // Text hinzufügen
+            // adding text
             const itemNameText = document.createElement('span');
             const translatedName = await getTranslation(item.own_name || item.item);
             itemNameText.classList.add('item-name');
@@ -214,7 +214,7 @@
         }
     }
 
-    // fetchData bei Seitenladung ausführen
+    // Run fetchData on page load
     fetchData();
     </script>
   </body>
