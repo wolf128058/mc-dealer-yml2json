@@ -1,58 +1,64 @@
 body {
-    background-color: #111;
-    color: #fff;
     font-family: Arial, sans-serif;
-    margin: 20px;
-}
-
-.table-container {
-    margin-top: 20px;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 20px;
-    border: 1px solid #fff;
-}
-
-td,
-th {
-    border: 1px solid #fff;
-    padding: 8px;
-    text-align: left;
-    width: 20%;
-}
-
-th {
-    background-color: #333;
-    color: #fff;
-}
-
-.low-stock {
-    color: red;
-}
-
-.shop-info {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#output-container-metadata {
-    float: right;
-}
-
-.shop-container {
-    margin-bottom: 20px;
+    background-color: #111;
+    color: #eee;
+    margin: 0;
+    padding: 20px;
 }
 
 #logo {
-    margin: 20px 0;
     text-align: center;
 }
 
 #logo img {
     max-width: 100%;
     height: auto;
+}
+
+#latestfilemoddate {
+    font-size: small;
+    color: gray;
+    margin-top: 5px;
+}
+
+.shop-container {
+    border: 2px solid #333;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.shop-info {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.table-container {
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: #eee;
+}
+
+.low-stock {
+    color: red;
+}
+
+.sold-out {
+    color: red;
 }
