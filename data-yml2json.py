@@ -101,6 +101,7 @@ if __name__ == '__main__':
                                 item_index = player_offer['own_name']
                         
                         player_offer['item'] = item_type
+                        player_offer['item'] = item_type.replace("minecraft:", "", 1)
                         player_offer['amount'] = offer_data['amount']
                         player_offer['price'] = offer_data['price']
 
@@ -118,7 +119,7 @@ if __name__ == '__main__':
                         player_demand = {}
 
                         item_type = offer_data['item']['type']
-                        player_demand['item'] = item_type
+                        player_demand['item'] = item_type.replace("minecraft:", "", 1)
                         player_demand['own_name'] = None
                         player_demand['amount'] = offer_data['amount']
                         player_demand['price'] = offer_data['buy_price']
