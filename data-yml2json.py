@@ -133,8 +133,8 @@ if __name__ == '__main__':
                         player_demand['unit_price'] = round(offer_data['price'] / offer_data['amount'], 2)
                         player_demand['buy_limit'] = offer_data['buy_limit']
 
-                        player_demands[item_index] = player_demand
                         item_index = item_type
+                        player_demands[item_index] = player_demand
 
             # Lagerbestände
             player_stocks = {}
