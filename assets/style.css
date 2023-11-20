@@ -71,7 +71,6 @@ body {
     width: 25%;
     display: inline-block;
     position: relative;
-    flex-grow: 1;
 }
 
 .shop-index-entry a {
