@@ -28,8 +28,8 @@ BEST_DEMANDS = {}
 
 def clean_minecraft_string(text):
     # Muster für Minecraft-Formatierungscodes
-    pattern = re.compile(r'§[0-9a-fklmnor]')    
-    return re.sub(pattern, '', text)    
+    pattern = re.compile(r'§[0-9a-fklmnor]')
+    return re.sub(pattern, '', text)
 
 def read_yaml_files(directory):
     global LATEST_FILEMODDATE
@@ -78,7 +78,7 @@ if __name__ == '__main__':
             # Angebote des Händlers
             player_offers = {}
             player_demands = {}
-            
+
             if 'items_for_sale' in result_dict[shop]:
                 for offer in result_dict[shop]['items_for_sale']:
                     offer_data = result_dict[shop]['items_for_sale'][offer]
@@ -87,7 +87,7 @@ if __name__ == '__main__':
                         player_offer['own_name'] = None
                         item_type = offer_data['item']['type']
                         item_index = item_type
-                        
+
                         if item_type == 'POTION':
                             if 'potion-type' in  offer_data['item']['meta']:
                                 item_type = offer_data['item']['meta']['potion-type']
@@ -108,7 +108,7 @@ if __name__ == '__main__':
                             elif 'translate' in json_displayname:
                                 player_offer['own_name'] = json_displayname['translate']
                                 item_index = player_offer['own_name']
-                        
+
                         player_offer['item'] = item_type
                         player_offer['item'] = item_type.replace("minecraft:", "", 1)
                         player_offer['amount'] = offer_data['amount']
@@ -123,7 +123,7 @@ if __name__ == '__main__':
                         player_offer['is_best_price'] = None
 
                         player_offers[item_index] = player_offer
-                    
+
                     elif offer_data['mode'] == 'BUY':
                     # Nachfragen des Händlers
                         player_demand = {}
@@ -149,7 +149,7 @@ if __name__ == '__main__':
                 for stock in result_dict[shop]['storage']:
                     item_type = stock['type']
                     item_index = stock['type']
-                        
+
                     if item_type == 'POTION':
                         if 'potion-type' in stock['meta']:
                             item_type = stock['meta']['potion-type']
@@ -177,7 +177,7 @@ if __name__ == '__main__':
                         player_stocks[item_index] = myamount
                     else:
                         player_stocks[item_index] += myamount
-              
+
                 # Lagerbestände in die Angebote übertragen
                 for stock_key in player_stocks:
                     if stock_key in player_offers:
@@ -193,7 +193,7 @@ if __name__ == '__main__':
             player_shops['shops'].append(player_shop)
             player_shops['meta']['latestfilemoddate'] = LATEST_FILEMODDATE
             player_shops['meta']['latestfilemoddate_formatted'] = datetime.fromtimestamp(LATEST_FILEMODDATE).strftime('%Y-%m-%d %H:%M:%S')
-        
+
         for shop in player_shops['shops']:
             for offer_key in shop['offers']:
                 discounted_unitprice = shop['offers'][offer_key]['unit_price']  * (1 - (shop['offers'][offer_key]['price_discount'] / 100))
@@ -202,7 +202,7 @@ if __name__ == '__main__':
                     shop['offers'][offer_key]['is_best_price'] = True
                 else:
                     shop['offers'][offer_key]['is_best_price'] = False
-            
+
             for demand_key in shop['demands']:
                 best_demands_key = shop['demands'][demand_key]['item']
                 if  shop['demands'][best_demands_key]['unit_price'] == BEST_DEMANDS[best_demands_key]:

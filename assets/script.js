@@ -66,7 +66,7 @@ async function displayData(shops) {
 
       const indexLink = document.createElement('a');
       indexLink.setAttribute('href', '#' + shop.shop_uuid);
-      
+
 
       const indexName = document.createElement('span');
       indexName.classList.add('index-shop-name');
