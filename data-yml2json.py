@@ -20,6 +20,9 @@ from datetime import datetime
 global LATEST_FILEMODDATE
 LATEST_FILEMODDATE = None
 
+global BEST_OFFERS
+BEST_OFFERS = {}
+
 def clean_minecraft_string(text):
     # Muster für Minecraft-Formatierungscodes
     pattern = re.compile(r'§[0-9a-fklmnor]')    
@@ -114,6 +117,7 @@ if __name__ == '__main__':
 
                         player_offer['unit_price'] = round(offer_data['price'] / offer_data['amount'], 2)
                         player_offer['stock'] = 0
+                        player_offer['is_best_price'] = None
 
                         player_offers[item_index] = player_offer
                     
@@ -170,13 +174,27 @@ if __name__ == '__main__':
                 # Lagerbestände in die Angebote übertragen
                 for stock_key in player_stocks:
                     if stock_key in player_offers:
+                        best_offers_key = player_offers[stock_key]['item']
                         player_offers[stock_key]['stock'] = player_stocks[stock_key]
+                        discounted_unitprice = player_offers[stock_key]['unit_price']  * (1 - (player_offers[stock_key]['price_discount'] / 100))
+
+                        if player_stocks[stock_key] > 0 and best_offers_key not in BEST_OFFERS or BEST_OFFERS[best_offers_key] > discounted_unitprice:
+                            BEST_OFFERS[best_offers_key] = discounted_unitprice
 
             player_shop['offers'] = player_offers
             player_shop['demands'] = player_demands
             player_shops['shops'].append(player_shop)
             player_shops['meta']['latestfilemoddate'] = LATEST_FILEMODDATE
             player_shops['meta']['latestfilemoddate_formatted'] = datetime.fromtimestamp(LATEST_FILEMODDATE).strftime('%Y-%m-%d %H:%M:%S')
+        
+        for shop in player_shops['shops']:
+            for offer_key in shop['offers']:
+                discounted_unitprice = shop['offers'][offer_key]['unit_price']  * (1 - (shop['offers'][offer_key]['price_discount'] / 100))
+                best_offers_key = shop['offers'][offer_key]['item']
+                if shop['offers'][offer_key]['stock'] > 0 and discounted_unitprice == BEST_OFFERS[best_offers_key]:
+                    shop['offers'][offer_key]['is_best_price'] = True
+                else:
+                    shop['offers'][offer_key]['is_best_price'] = False
 
         # Datenausgabe als JSON-Datei
         with open("output.json", "w") as outfile:
