@@ -272,5 +272,26 @@ async function setupTable(table, items, isBuyTable) {
   }
 }
 
+window.onscroll = function() {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  var scrollBtn = document.getElementById("btnScroll2Top");
+  if (document.body.scrollTop > (window.innerHeight * 0.1) || document.documentElement.scrollTop > (window.innerHeight * 0.1)) {
+    scrollBtn.style.display = "block";
+    scrollBtn.style.opacity = ".666";
+  } else {
+    scrollBtn.style.opacity = "0";
+    setTimeout(function() {
+      scrollBtn.style.display = "none";
+    }, 300);
+  }
+}
+
+function scrollToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
 // Run fetchData on page load
 fetchData();
