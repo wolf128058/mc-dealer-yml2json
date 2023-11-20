@@ -154,7 +154,8 @@ tr td:not(:first-child) {
     text-align: right
 }
 
-.discount-percentage {
+.discount-percentage,
+.bestprice-tag {
     color: #5FF;
     vertical-align: super;
     display: inline;

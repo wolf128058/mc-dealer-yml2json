@@ -245,6 +245,16 @@ async function setupTable(table, items, isBuyTable) {
       ? `${config.currencySymbol}${unit_price.toFixed(2)}`
       : `${unit_price.toFixed(2)}${config.currencySymbol}`;
 
+    if (typeof item.is_best_price !== "undefined" && item.is_best_price == true) {
+        const bestpriceSpan = document.createElement("span");
+        bestpriceSpan.classList.add("bestprice-tag");
+        bestpriceSpan.innerHTML = "&#9989;";
+        bestpriceSpan.setAttribute('title', 'best price');
+        unitPriceCell.appendChild(bestpriceSpan);
+        priceCell.classList.add("bestprice");
+        unitPriceCell.classList.add("bestprice");
+    }
+
     unitPriceCell.appendChild(unitpriceSpan);
 
     // stock or demand
