@@ -60,6 +60,9 @@ async function displayData(shops) {
 
   if (Array.isArray(shops)) {
     for (const shop of shops) {
+      if (Object.keys(shop.offers).length == 0 && Object.keys(shop.demands).length == 0) {
+        continue;
+      }
       //Entry in Index-Table
       const indexEntry = document.createElement('div');
       indexEntry.classList.add('shop-index-entry');
