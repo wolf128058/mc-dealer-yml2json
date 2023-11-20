@@ -76,10 +76,10 @@ async function displayData(shops) {
       const indexOwner = document.createElement('span');
       indexOwner.classList.add('index-shop-owner');
       indexOwner.textContent = `by ${shop.owner_name}`;
-      indexLink.appendChild(indexOwner)
-      
-      indexEntry.appendChild(indexLink)
-      indexContainer.appendChild(indexEntry)
+      indexLink.appendChild(indexOwner);
+
+      indexEntry.appendChild(indexLink);
+      indexContainer.appendChild(indexEntry);
 
       // Shop-Container
       const shopContainer = document.createElement('div');
