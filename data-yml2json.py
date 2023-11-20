@@ -23,6 +23,9 @@ LATEST_FILEMODDATE = None
 global BEST_OFFERS
 BEST_OFFERS = {}
 
+global BEST_DEMANDS
+BEST_DEMANDS = {}
+
 def clean_minecraft_string(text):
     # Muster für Minecraft-Formatierungscodes
     pattern = re.compile(r'§[0-9a-fklmnor]')    
@@ -132,9 +135,13 @@ if __name__ == '__main__':
                         player_demand['price'] = offer_data['buy_price']
                         player_demand['unit_price'] = round(offer_data['price'] / offer_data['amount'], 2)
                         player_demand['buy_limit'] = offer_data['buy_limit']
+                        player_demand['is_best_price'] = None
 
                         item_index = item_type
                         player_demands[item_index] = player_demand
+
+                        if player_demand['item'] not in BEST_DEMANDS or BEST_DEMANDS[player_demand['item']] < player_demand['unit_price']:
+                            BEST_DEMANDS[player_demand['item']] =  player_demand['unit_price']
 
             # Lagerbestände
             player_stocks = {}
@@ -195,6 +202,13 @@ if __name__ == '__main__':
                     shop['offers'][offer_key]['is_best_price'] = True
                 else:
                     shop['offers'][offer_key]['is_best_price'] = False
+            
+            for demand_key in shop['demands']:
+                best_demands_key = shop['demands'][demand_key]['item']
+                if  shop['demands'][best_demands_key]['unit_price'] == BEST_DEMANDS[best_demands_key]:
+                    shop['demands'][best_demands_key]['is_best_price'] = True
+                else:
+                    shop['demands'][best_demands_key]['is_best_price'] = False
 
         # Datenausgabe als JSON-Datei
         with open("output.json", "w") as outfile:
