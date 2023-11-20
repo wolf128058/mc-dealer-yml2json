@@ -205,23 +205,47 @@ async function setupTable(table, items, isBuyTable) {
     const amountCell = row.insertCell();
     amountCell.textContent = item.amount;
 
-    // price
     const priceCell = row.insertCell();
+    const unitPriceCell = row.insertCell();
+
+    if (typeof item.price_discount !== "undefined" && item.price_discount !== 0) {
+        const discountSpan = document.createElement("span");
+        discountSpan.classList.add("discount-percentage");
+        discountSpan.textContent = (100 - item.price_discount) + " %";
+        priceCell.appendChild(discountSpan);
+        priceCell.classList.add("discount");
+        unitPriceCell.classList.add("discount");
+    }
+
+    // price
     let price = item.price;
+    const priceSpan = document.createElement("span");
+    priceSpan.classList.add("price");
     if (typeof item.price_discount !== 'undefined') {
       price = item.price_discount === 0
         ? item.price
         : item.price - (item.price * (item.price_discount / 100));
     }
-    priceCell.textContent = config.currencySymbolPosition === 'before'
+    priceSpan.textContent = config.currencySymbolPosition === 'before'
       ? `${config.currencySymbol}${price.toFixed(2)}`
       : `${price.toFixed(2)}${config.currencySymbol}`;
 
+    priceCell.appendChild(priceSpan);
+
     // price per unit
-    const unitPriceCell = row.insertCell();
-    unitPriceCell.textContent = config.currencySymbolPosition === 'before'
-      ? `${config.currencySymbol}${item.unit_price.toFixed(2)}`
-      : `${item.unit_price.toFixed(2)}${config.currencySymbol}`;
+    let unit_price = item.unit_price;
+    const unitpriceSpan = document.createElement("span");
+    unitpriceSpan.classList.add("price");
+    if (typeof item.price_discount !== "undefined") {
+      unit_price = item.price_discount === 0
+        ? item.unit_price
+        : item.unit_price - item.unit_price * (item.price_discount / 100);
+    }
+    unitpriceSpan.textContent = config.currencySymbolPosition === "before"
+      ? `${config.currencySymbol}${unit_price.toFixed(2)}`
+      : `${unit_price.toFixed(2)}${config.currencySymbol}`;
+
+    unitPriceCell.appendChild(unitpriceSpan);
 
     // stock or demand
     const stockCell = row.insertCell();
