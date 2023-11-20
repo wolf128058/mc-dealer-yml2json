@@ -211,7 +211,7 @@ async function setupTable(table, items, isBuyTable) {
     if (typeof item.price_discount !== "undefined" && item.price_discount !== 0) {
         const discountSpan = document.createElement("span");
         discountSpan.classList.add("discount-percentage");
-        discountSpan.textContent = (100 - item.price_discount) + " %";
+        discountSpan.textContent = item.price_discount + " %";
         priceCell.appendChild(discountSpan);
         priceCell.classList.add("discount");
         unitPriceCell.classList.add("discount");
