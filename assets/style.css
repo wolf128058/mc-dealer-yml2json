@@ -186,3 +186,21 @@ tr td:not(:first-child) {
     width: 2.5rem;
     height: 2.5rem;
 }
+
+@media only screen and (max-width: 1024px) {
+    .shop-index-entry {
+        width: 33.33%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .shop-index-entry {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .shop-index-entry {
+        width: 100%;
+    }
+}
