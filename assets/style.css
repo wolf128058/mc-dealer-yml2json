@@ -154,6 +154,14 @@ tr td:not(:first-child) {
     text-align: right
 }
 
+.discount-percentage {
+    color: #5FF;
+    vertical-align: super;
+    display: inline;
+    font-size: 12px;
+    padding-right: .5rem;
+}
+
 .low-stock {
     color: red;
 }
