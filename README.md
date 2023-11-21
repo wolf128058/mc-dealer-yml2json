@@ -10,3 +10,4 @@ This tool converts your yml-Files from the Minecraft plugin [Villager Market](ht
 - a scheduled job providing the yml-files in the subdirectory "data"
 - a scheduled job that runs the python script data-yml2json.py to generate the json data. You can use the same job to run those two tasks one after another. See [example-batch-script](mc-dealer-copy-execute.bat)
 - a webserver, that provides all the files. You may want to protect the data-Subdirectory. Feel free to use htacccess or similiar.
+- If you have [Josh's More Foods](https://modrinth.com/datapack/joshs-more-foods/) installed, there is a [script](assets/items/joshs-more-foods/rp-downloader.py) for you to download the neccesary images. Run it once.
