@@ -178,7 +178,7 @@ async function setupTable(table, items, isBuyTable) {
     let imagePath = `assets/items/${item.item.toLowerCase()}.png`; // Path to icons
     if (item.own_name !== null && item.own_name.startsWith('item.jmmf.')) {
       imagePath = `assets/items/joshs-more-foods/${item.own_name.slice(10).toLowerCase()}.png`;
-    } 
+    }
     // Check if the icon exists
     if (availableImages.includes(imagePath)) {
       itemImage.src = imagePath;
