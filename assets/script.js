@@ -1,5 +1,7 @@
+const dummyImagePath = 'assets/items/air.png'; // Path to dummy icon
 let config = {};
 let translations = {};
+let availableImages = [];
 
 async function fetchConfig() {
   try {
@@ -177,13 +179,17 @@ async function setupTable(table, items, isBuyTable) {
     if (item.own_name !== null && item.own_name.startsWith('item.jmmf.')) {
       imagePath = `assets/items/joshs-more-foods/${item.own_name.slice(10).toLowerCase()}.png`;
     } 
-    const dummyImagePath = 'assets/items/air.png'; // Path to dummy icon
-
     // Check if the icon exists
-    fetch(imagePath).then(response => {
+    if (availableImages.includes(imagePath)) {
+      itemImage.src = imagePath;
+      itemImage.alt = translatedName;
+      itemImageSpan.appendChild(itemImage);
+    } else {
+      fetch(imagePath).then(response => {
         if (response.ok) {
           itemImage.src = imagePath;
           itemImage.alt = translatedName;
+          availableImages.push(imagePath);
         } else {
           // Image not found, use dummy icon
           itemImage.src = dummyImagePath;
@@ -197,6 +203,7 @@ async function setupTable(table, items, isBuyTable) {
       }). finally(() => {
         itemImageSpan.appendChild(itemImage);
       });
+    }
 
     // adding text
     const itemNameText = document.createElement('span');
