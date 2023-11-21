@@ -239,16 +239,64 @@ async function setupTable(table, items, isBuyTable) {
         ? item.price
         : item.price - (item.price * (item.price_discount / 100));
     }
-    priceSpan.textContent = config.currencySymbolPosition === 'before'
-      ? `${config.currencySymbol}${price.toFixed(2)}`
-      : `${price.toFixed(2)}${config.currencySymbol}`;
+
+    const priceSpanText = document.createElement("span");
+    priceSpanText.textContent = price;
+
+    const exchangeItemIcon = document.createElement("img");
+    exchangeItemIcon.setAttribute('title', await getTranslation(item.exchange_item));
+
+    let exImagePath = dummyImagePath; // Path to icons
+
+    if (item.exchange_item == 'money') {
+      priceSpan.textContent = config.currencySymbolPosition === 'before'
+        ? `${config.currencySymbol}${price.toFixed(2)}`
+        : `${price.toFixed(2)}${config.currencySymbol}`;
+    } else {
+
+      exImagePath = `assets/items/${item.exchange_item.toLowerCase()}.png`; // Path to icons
+      if (item.own_name !== null && item.exchange_item.startsWith('item.jmmf.')) {
+        exImagePath = `assets/items/joshs-more-foods/${item.exchange_item.slice(10).toLowerCase()}.png`;
+      }
+
+      // Check if the icon exists
+      if (availableImages.includes(exImagePath)) {
+        exchangeItemIcon.src = exImagePath;
+        exchangeItemIcon.alt = translatedName;
+      } else {
+        fetch(exImagePath).then(response => {
+          if (response.ok) {
+            exchangeItemIcon.src = exImagePath;
+            exchangeItemIcon.alt = translatedName;
+            availableImages.push(exImagePath);
+          } else {
+            // Image not found, use dummy icon
+            exchangeItemIcon.src = dummyImagePath;
+            exchangeItemIcon.alt = 'Dummy Image';
+          }
+        }).catch(error => {
+          console.error('Error on loading item image:', error);
+          // If there is an error, also use the dummy icon
+          exchangeItemIcon.src = dummyImagePath;
+          exchangeItemIcon.alt = 'Dummy Image';
+        }). finally(() => {
+          if (config.currencySymbolPosition === "before"){
+            priceSpan.appendChild(exchangeItemIcon);
+            priceSpan.appendChild(priceSpanText);
+          } else {
+            priceSpan.appendChild(priceSpanText);
+            priceSpan.appendChild(exchangeItemIcon);
+          }
+        });
+      }
+    }
 
     priceCell.appendChild(priceSpan);
 
     // price per unit
     const unitpriceSpan = document.createElement("span");
     unitpriceSpan.classList.add("price");
-    
+
     let unit_price = item.unit_price;
     if (typeof item.price_discount !== "undefined") {
       unit_price = item.price_discount === 0
@@ -258,50 +306,29 @@ async function setupTable(table, items, isBuyTable) {
     const unitpriceSpanText = document.createElement("span");
     unitpriceSpanText.textContent = unit_price;
 
-
-
     if (item.exchange_item == 'money') {
       unitpriceSpan.textContent = config.currencySymbolPosition === "before"
         ? `${config.currencySymbol}${unit_price.toFixed(2)}`
         : `${unit_price.toFixed(2)}${config.currencySymbol}`;
     } else {
-      const unitPriceIcon = document.createElement("img");
-      unitPriceIcon.setAttribute('title', await getTranslation(item.exchange_item));
-      let exImagePath = `assets/items/${item.exchange_item.toLowerCase()}.png`; // Path to icons
+
+      const newExchangeItemIcon = document.createElement("img");
+      newExchangeItemIcon.setAttribute('title', await getTranslation(item.exchange_item));
+      newExchangeItemIcon.setAttribute('alt', await getTranslation(item.exchange_item));
+      exImagePath = `assets/items/${item.exchange_item.toLowerCase()}.png`; // Path to icons
       if (item.own_name !== null && item.exchange_item.startsWith('item.jmmf.')) {
         exImagePath = `assets/items/joshs-more-foods/${item.exchange_item.slice(10).toLowerCase()}.png`;
-      } 
+      }
 
-      // Check if the icon exists
-      if (availableImages.includes(exImagePath)) {
-        unitPriceIcon.src = exImagePath;
-        unitPriceIcon.alt = translatedName;
+      newExchangeItemIcon.src = exImagePath;
+
+      if (config.currencySymbolPosition === "before"){
+        unitpriceSpan.appendChild(newExchangeItemIcon);
+        unitpriceSpan.appendChild(unitpriceSpanText);
       } else {
-        fetch(exImagePath).then(response => {
-          if (response.ok) {
-            unitPriceIcon.src = exImagePath;
-            unitPriceIcon.alt = translatedName;
-            availableImages.push(exImagePath);
-          } else {
-            // Image not found, use dummy icon
-            unitPriceIcon.src = dummyImagePath;
-            unitPriceIcon.alt = 'Dummy Image';
-          }
-        }).catch(error => {
-          console.error('Error on loading item image:', error);
-          // If there is an error, also use the dummy icon
-          unitPriceIcon.src = dummyImagePath;
-          unitPriceIcon.alt = 'Dummy Image';
-        }). finally(() => {
-          if (config.currencySymbolPosition === "before"){
-            unitpriceSpan.appendChild(unitPriceIcon);
-            unitpriceSpan.appendChild(unitpriceSpanText);
-          } else {
-            unitpriceSpan.appendChild(unitpriceSpanText);
-            unitpriceSpan.appendChild(unitPriceIcon);
-          }          
-        });
-      }      
+        unitpriceSpan.appendChild(unitpriceSpanText);
+        unitpriceSpan.appendChild(newExchangeItemIcon);
+      }
     }
 
     if (typeof item.is_best_price !== "undefined" && item.is_best_price == true) {
