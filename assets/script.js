@@ -154,7 +154,7 @@ async function setupTable(table, items, isBuyTable) {
   if (isBuyTable) {
     headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Nachfrage'];
   } else {
-    headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Bestand']
+    headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Bestand'];
   }
   headers.forEach(headerText => {
     const header = document.createElement('th');
