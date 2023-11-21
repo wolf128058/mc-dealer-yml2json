@@ -173,7 +173,10 @@ async function setupTable(table, items, isBuyTable) {
     itemImageSpan.classList.add('item-image');
 
     const itemImage = document.createElement('img');
-    const imagePath = `assets/items/${item.item.toLowerCase()}.png`; // Path to icons
+    let imagePath = `assets/items/${item.item.toLowerCase()}.png`; // Path to icons
+    if (item.own_name !== null && item.own_name.startsWith('item.jmmf.')) {
+      imagePath = `assets/items/joshs-more-foods/${item.own_name.slice(10).toLowerCase()}.png`;
+    } 
     const dummyImagePath = 'assets/items/air.png'; // Path to dummy icon
 
     // Check if the icon exists
