@@ -154,7 +154,7 @@ if __name__ == '__main__':
                         item_index = item_type
                         player_demands[item_index] = player_demand
 
-                        if player_demand['item'] not in BEST_DEMANDS or BEST_DEMANDS[player_demand['item']] < player_demand['unit_price']:
+                        if player_demand['exchange_item'] == 'money' and player_demand['item'] not in BEST_DEMANDS or BEST_DEMANDS[player_demand['item']] < player_demand['unit_price']:
                             BEST_DEMANDS[player_demand['item']] =  player_demand['unit_price']
 
             # Lagerbestände
@@ -199,7 +199,7 @@ if __name__ == '__main__':
                         player_offers[stock_key]['stock'] = player_stocks[stock_key]
                         discounted_unitprice = player_offers[stock_key]['unit_price']  * (1 - (player_offers[stock_key]['price_discount'] / 100))
 
-                        if player_stocks[stock_key] > 0 and best_offers_key not in BEST_OFFERS or BEST_OFFERS[best_offers_key] > discounted_unitprice:
+                        if player_offers[stock_key]['exchange_item'] == 'money' and player_stocks[stock_key] > 0 and best_offers_key not in BEST_OFFERS or BEST_OFFERS[best_offers_key] > discounted_unitprice:
                             BEST_OFFERS[best_offers_key] = discounted_unitprice
 
             player_shop['offers'] = player_offers
