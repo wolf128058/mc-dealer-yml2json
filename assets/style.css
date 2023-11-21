@@ -153,6 +153,12 @@ tr td:not(:first-child) {
     text-align: right
 }
 
+.price img {
+    margin-left: .5rem;
+    vertical-align: bottom;
+    margin-bottom: .125rem;
+}
+
 .discount-percentage,
 .bestprice-tag {
     color: #5FF;
