@@ -45,15 +45,12 @@ if os.path.exists(translations_file_path):
                     if translation_key not in translations:
                         os.remove(file_path)
                     else:
-                        shutil.move(file_path, os.path.join(extracted_folder, file))
+                        shutil.move(file_path, os.path.join(os.path.dirname(extracted_folder), file))
 
-    # Remove empty directories
-    for root, dirs, files in os.walk(extracted_folder, topdown=False):
-        for dir in dirs:
-            dir_path = os.path.join(root, dir)
-            if not os.listdir(dir_path):
-                os.rmdir(dir_path)
-    
+    # Remove the 'extracted_contents' directory
+    shutil.rmtree(extracted_folder)
+
+    # Delete the ZIP file after processing
     os.remove(zip_file_name)
 else:
     print("translations.json file not found.")
