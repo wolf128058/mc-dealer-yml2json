@@ -153,6 +153,10 @@ tr td:not(:first-child) {
     text-align: right
 }
 
+tr:nth-child(2n+1) {
+    background-color: #1a1a1a;
+}
+
 .price img {
     margin-left: .5rem;
     vertical-align: bottom;
