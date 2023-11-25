@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
+## [0.6.1] - 2020-11-25
+
+- Providing additinal translations in IT, FR and CN now.
+- In case of CN switched the th-Font to a simplier one.
+
 ## [0.6.0] - 2020-11-25
 
 - Providing translations in DE, EN and ES now.
