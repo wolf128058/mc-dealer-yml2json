@@ -38,16 +38,16 @@ def read_yaml_files(directory):
         if filename.endswith(".yml"):
             with open(os.path.join(directory, filename), "r", encoding="utf-8") as file:
                 data = yaml.safe_load(file)
-                # Assuming 'ownerUUID' exists in each YAML file
+                base_filename = os.path.splitext(os.path.basename(filename))[0]
                 uuid = data.get("ownerUUID")
-                if uuid:
-                    base_filename = os.path.splitext(os.path.basename(filename))[0]
-                    data['shop_uuid'] = base_filename
-                    data_dict[base_filename] = data
-                    file_stat = os.stat(os.path.join(directory, filename))
-                    modified_time = file_stat.st_mtime
-                    if LATEST_FILEMODDATE is None or  modified_time > LATEST_FILEMODDATE:
-                        LATEST_FILEMODDATE = modified_time
+                if not uuid:
+                    uuid = base_filename
+                data['shop_uuid'] = base_filename
+                data_dict[base_filename] = data
+                file_stat = os.stat(os.path.join(directory, filename))
+                modified_time = file_stat.st_mtime
+                if LATEST_FILEMODDATE is None or  modified_time > LATEST_FILEMODDATE:
+                    LATEST_FILEMODDATE = modified_time
                     # print(data)
     return data_dict
 
@@ -63,8 +63,15 @@ if __name__ == '__main__':
 
             # Meta-Daten des Shops
             player_shop['shop_uuid'] = result_dict[shop]['shop_uuid']
-            player_shop['owner_uuid'] = result_dict[shop]['ownerUUID']
-            player_shop['owner_name'] = result_dict[shop]['ownerName']
+            player_shop['shop_type'] = result_dict[shop]['type']
+            if 'ownerUUID' in result_dict[shop]:
+                player_shop['owner_uuid'] = result_dict[shop]['ownerUUID']
+            if player_shop['shop_type'] == 'ADMIN':
+                player_shop['owner_name'] = 'ADMIN'
+            
+            if 'ownerName' in result_dict[shop]:
+                player_shop['owner_name'] = result_dict[shop]['ownerName']
+
             player_shop['shop_name'] = clean_minecraft_string(result_dict[shop]['entity']['name'])
             player_shop['shop_name'] = re.sub(r"\[.*?\]", "", player_shop['shop_name']).strip()
             player_shop['npc_profession'] =result_dict[shop]['entity']['profession']
