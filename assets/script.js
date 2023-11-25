@@ -76,7 +76,7 @@ async function checkLanguageCookie(defaultLanguage) {
 // Translation
 async function getTranslation(text) {
   if (Object.keys(translations).length === 0) {
-    await loadTranslations(config.defaultLanguage);
+    await loadTranslations(selectedLanguage);
   }
 
   if (translations.hasOwnProperty(text)) {
