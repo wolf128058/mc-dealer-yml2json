@@ -224,7 +224,7 @@ if __name__ == '__main__':
             for offer_key in shop['offers']:
                 discounted_unitprice = shop['offers'][offer_key]['unit_price']  * (1 - (shop['offers'][offer_key]['price_discount'] / 100))
                 best_offers_key = shop['offers'][offer_key]['item']
-                if shop['offers'][offer_key]['stock'] > 0 and discounted_unitprice == BEST_OFFERS[best_offers_key]:
+                if (shop['shop_type'] == 'ADMIN' or shop['offers'][offer_key]['stock'] > 0) and discounted_unitprice == BEST_OFFERS[best_offers_key]:
                     shop['offers'][offer_key]['is_best_price'] = True
                 else:
                     shop['offers'][offer_key]['is_best_price'] = False
