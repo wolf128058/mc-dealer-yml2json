@@ -13,12 +13,26 @@ async function fetchConfig() {
   }
 }
 
-async function loadTranslations() {
+async function showTranslationMenu(languages2offer) {
+  const langContainer = document.getElementById("languages-container");
+  const langSelect = document.createElement("select");
+  langSelect.setAttribute("id", "language-select");
+
+  languages2offer.forEach(lang => {
+    let langOption = document.createElement("option");
+    langOption.setAttribute("value", lang);
+    langOption.textContent = lang;
+    langSelect.append(langOption);
+  });
+  langContainer.append(langSelect);
+}
+
+async function loadTranslations(iso2alpha) {
   try {
-    const response = await fetch('assets/translations_de.json');
+    const response = await fetch("assets/translations_" + iso2alpha + ".json");
     translations = await response.json();
   } catch (error) {
-    console.error('Error reading translation list:', error);
+    console.error("Error reading translation list:", error);
     translations = {};
   }
 }
@@ -26,7 +40,7 @@ async function loadTranslations() {
 // Translation
 async function getTranslation(text) {
   if (Object.keys(translations).length === 0) {
-    await loadTranslations();
+    await loadTranslations(config.defaultLanguage);
   }
 
   if (translations.hasOwnProperty(text)) {
@@ -41,6 +55,7 @@ async function fetchData() {
     config = await fetchConfig();
     const response = await fetch('output.json');
     const data = await response.json();
+    showTranslationMenu(config.offerLanguages);
     displayData(data.shops);
     displayLatestFileModDate(data.meta.latestfilemoddate_formatted);
   } catch (error) {
