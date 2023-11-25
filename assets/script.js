@@ -37,6 +37,38 @@ async function loadTranslations(iso2alpha) {
   }
 }
 
+async function changeLanguage() {
+  const selectElement = document.getElementById("language-select");
+  const selectedLanguage = selectElement.value;
+  const expirationDate = new Date();
+  expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+  document.cookie = `preferredLanguage=${selectedLanguage}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict`;
+  window.location.reload();
+}
+
+async function checkLanguageCookie() {
+  const cookies = document.cookie.split(";");
+  let preferredLanguage = null;
+
+  cookies.forEach(cookie => {
+    const [name, value] = cookie.split("=");
+    if (name.trim() === "preferredLanguage") {
+      preferredLanguage = value;
+    }
+  });
+
+  const selectElement = document.getElementById("language-select");
+  if (preferredLanguage) {
+    selectElement.value = preferredLanguage;
+  } else {
+    const expirationDate = new Date();
+    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+    document.cookie = `preferredLanguage=de; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict`;
+    selectElement.value = "de";
+  }
+}
+
 // Translation
 async function getTranslation(text) {
   if (Object.keys(translations).length === 0) {
