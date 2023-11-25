@@ -47,7 +47,7 @@ async function changeLanguage() {
   window.location.reload();
 }
 
-async function checkLanguageCookie() {
+async function checkLanguageCookie(defaultLanguage) {
   const cookies = document.cookie.split(";");
   let preferredLanguage = null;
 
@@ -61,12 +61,14 @@ async function checkLanguageCookie() {
   const selectElement = document.getElementById("language-select");
   if (preferredLanguage) {
     selectElement.value = preferredLanguage;
+    selectedLanguage = preferredLanguage;
   } else {
     const expirationDate = new Date();
     expirationDate.setFullYear(expirationDate.getFullYear() + 1);
 
-    document.cookie = `preferredLanguage=de; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict`;
-    selectElement.value = "de";
+    document.cookie = `preferredLanguage=${defaultLanguage}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict`;
+    selectElement.value = defaultLanguage;
+    selectedLanguage = defaultLanguage;
   }
 }
 
@@ -89,6 +91,7 @@ async function fetchData() {
     const response = await fetch('output.json');
     const data = await response.json();
     showTranslationMenu(config.offerLanguages);
+    checkLanguageCookie(config.defaultLanguage);
     displayData(data.shops);
     displayLatestFileModDate(data.meta.latestfilemoddate_formatted);
   } catch (error) {
