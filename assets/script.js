@@ -168,7 +168,11 @@ async function displayData(shops) {
 
       const shopOwner = document.createElement('span');
       shopOwner.classList.add('shop-owner');
-      shopOwner.textContent = `by ${shop.owner_name}`;
+      if (shop.shop_type == 'ADMIN') {
+        shopOwner.textContent = `by ${shop.owner_name} 🤖`;
+      } else {
+        shopOwner.textContent = `by ${shop.owner_name}`;
+      }
       shopInfo.appendChild(shopOwner);
 
       shopContainer.appendChild(shopInfo);
