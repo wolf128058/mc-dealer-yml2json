@@ -17,6 +17,7 @@ async function showTranslationMenu(languages2offer) {
   const langContainer = document.getElementById("languages-container");
   const langSelect = document.createElement("select");
   langSelect.setAttribute("id", "language-select");
+  langSelect.addEventListener("change", changeLanguage);
 
   languages2offer.forEach(lang => {
     let langOption = document.createElement("option");
