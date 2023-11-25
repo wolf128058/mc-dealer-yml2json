@@ -170,7 +170,7 @@ async function displayData(shops) {
         sellTableContainer.appendChild(sellTableTitle);
 
         const sellTable = document.createElement('table');
-        await setupTable(sellTable, shop.offers, false);
+        await setupTable(sellTable, shop.offers, false, shop.shop_type);
         sellTableContainer.appendChild(sellTable);
         shopContainer.appendChild(sellTableContainer);
       }
@@ -186,7 +186,7 @@ async function displayData(shops) {
         buyTableContainer.appendChild(buyTableTitle);
 
         const buyTable = document.createElement('table');
-        await setupTable(buyTable, shop.demands, true);
+        await setupTable(buyTable, shop.demands, true, shop.shop_type);
         buyTableContainer.appendChild(buyTable);
         shopContainer.appendChild(buyTableContainer);
       }
@@ -199,7 +199,7 @@ async function displayData(shops) {
 }
 
 // Table setup function
-async function setupTable(table, items, isBuyTable) {
+async function setupTable(table, items, isBuyTable, shopType) {
   // Table header
   const headerRow = table.insertRow();
   let headers = [];
@@ -409,15 +409,19 @@ async function setupTable(table, items, isBuyTable) {
 
     // stock or demand
     const stockCell = row.insertCell();
-    if (isBuyTable) {
-      stockCell.textContent = item.buy_limit;
-    } else {
-      stockCell.textContent = item.stock === 0
-        ? await getTranslation('MCDEALER_LABEL_SOLD_OUT')
-        : item.stock;
-      if (item.stock < 5) {
-        stockCell.classList.add('low-stock');
+    if (shopType !== 'ADMIN') {
+      if (isBuyTable) {
+        stockCell.textContent = item.buy_limit;
+      } else {
+        stockCell.textContent = item.stock === 0
+          ? await getTranslation('MCDEALER_LABEL_SOLD_OUT')
+          : item.stock;
+        if (item.stock < 5) {
+          stockCell.classList.add('low-stock');
+        }
       }
+    } else {
+      stockCell.textContent = '∞';
     }
   }
 }
