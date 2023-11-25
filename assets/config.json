@@ -1,4 +1,6 @@
 {
   "currencySymbol": "ʗ",
-  "currencySymbolPosition": "after"
+  "currencySymbolPosition": "after",
+  "defaultLanguage": "de",
+  "offerLanguages": ["de", "en"]
 }
