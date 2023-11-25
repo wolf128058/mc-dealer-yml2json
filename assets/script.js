@@ -15,7 +15,7 @@ async function fetchConfig() {
 
 async function loadTranslations() {
   try {
-    const response = await fetch('assets/translations.json');
+    const response = await fetch('assets/translations_de.json');
     translations = await response.json();
   } catch (error) {
     console.error('Error reading translation list:', error);

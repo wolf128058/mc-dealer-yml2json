@@ -23,7 +23,7 @@ with zipfile.ZipFile(zip_file_name, 'r') as zip_ref:
     zip_ref.extractall(extracted_folder)
 
 # Check files
-translations_file_path = '../../translations.json'  # Relative path to translations.json
+translations_file_path = '../../translations_de.json'  # Relative path to translations_XY.json
 if os.path.exists(translations_file_path):
     with open(translations_file_path, 'r') as file:
         translations = json.load(file)
@@ -53,4 +53,4 @@ if os.path.exists(translations_file_path):
     # Delete the ZIP file after processing
     os.remove(zip_file_name)
 else:
-    print("translations.json file not found.")
+    print("translations file not found.")
