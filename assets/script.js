@@ -361,7 +361,7 @@ async function setupTable(table, items, isBuyTable) {
       stockCell.textContent = item.buy_limit;
     } else {
       stockCell.textContent = item.stock === 0
-        ? 'Sold out'
+        ? await getTranslation('MCDEALER_LABEL_SOLD_OUT')
         : item.stock;
       if (item.stock < 5) {
         stockCell.classList.add('low-stock');
