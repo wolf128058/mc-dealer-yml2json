@@ -4,6 +4,16 @@ let config = {};
 let translations = {};
 let availableImages = [];
 
+async function setSimpleThFont() {
+  const style = document.createElement("style");
+  style.textContent = "th { font-family: sans-serif; }";
+
+  const head = document.head || document.getElementsByTagName("head")[0];
+  if (head) {
+    head.appendChild(style);
+  }
+}
+
 async function fetchConfig() {
   try {
     const response = await fetch('assets/config.json');
@@ -36,6 +46,10 @@ async function loadTranslations(iso2alpha) {
   } catch (error) {
     console.error("Error reading translation list:", error);
     translations = {};
+  }
+
+  if (iso2alpha === "cn") {
+    setSimpleThFont();
   }
 }
 
