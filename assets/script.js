@@ -114,7 +114,7 @@ async function displayData(shops) {
 
         const sellTableTitle = document.createElement('h2');
         sellTableTitle.classList.add('selling-title');
-        sellTableTitle.innerHTML = await getTranslation('Selling');
+        sellTableTitle.innerHTML = await getTranslation('MCDEALER_HEADLINE_SELLING');
         sellTableContainer.appendChild(sellTableTitle);
 
         const sellTable = document.createElement('table');
@@ -130,7 +130,7 @@ async function displayData(shops) {
 
         const buyTableTitle = document.createElement('h2');
         buyTableTitle.classList.add('buying-title');
-        buyTableTitle.innerHTML = await getTranslation('Buying');
+        buyTableTitle.innerHTML = await getTranslation('MCDEALER_HEADLINE_BUYING');
         buyTableContainer.appendChild(buyTableTitle);
 
         const buyTable = document.createElement('table');
