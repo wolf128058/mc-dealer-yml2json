@@ -132,7 +132,7 @@ if __name__ == '__main__':
                         if 'discount' in offer_data and 'amount' in offer_data['discount']:
                             player_offer['price_discount'] = offer_data['discount']['amount']
 
-                        player_offer['unit_price'] = round(player_offer['price'] / offer_data['amount'], 2)
+                        player_offer['unit_price'] = player_offer['price'] / offer_data['amount']
                         player_offer['stock'] = 0
                         player_offer['is_best_price'] = None
 
@@ -159,7 +159,7 @@ if __name__ == '__main__':
                             player_demand['exchange_item'] = offer_data['price']['type'].replace("minecraft:", "", 1)
                             player_demand['price'] = offer_data['price']['amount']
 
-                        player_demand['unit_price'] = round(player_demand['price']/ offer_data['amount'], 2)
+                        player_demand['unit_price'] = player_demand['price']/ offer_data['amount']
                         player_demand['buy_limit'] = offer_data['buy_limit']
                         player_demand['is_best_price'] = None
 
