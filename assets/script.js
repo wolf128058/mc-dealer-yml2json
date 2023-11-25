@@ -152,9 +152,21 @@ async function setupTable(table, items, isBuyTable) {
   const headerRow = table.insertRow();
   let headers = [];
   if (isBuyTable) {
-    headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Nachfrage'];
+    headers = [
+      await getTranslation('MCDEALER_HEADLINE_ITEM'),
+      await getTranslation('MCDEALER_HEADLINE_AMOUNT'),
+      await getTranslation('MCDEALER_HEADLINE_PRICE'),
+      await getTranslation('MCDEALER_HEADLINE_UNIT_PRICE'),
+      await getTranslation('MCDEALER_HEADLINE_DEMAND'),
+        ];
   } else {
-    headers = ['Item', 'Menge', 'Preis', 'Stückpreis', 'Bestand'];
+    headers = [
+      await getTranslation('MCDEALER_HEADLINE_ITEM'),
+      await getTranslation('MCDEALER_HEADLINE_AMOUNT'),
+      await getTranslation('MCDEALER_HEADLINE_PRICE'),
+      await getTranslation('MCDEALER_HEADLINE_UNIT_PRICE'),
+      await getTranslation('MCDEALER_HEADLINE_STOCK'),
+        ];
   }
   headers.forEach(headerText => {
     const header = document.createElement('th');
