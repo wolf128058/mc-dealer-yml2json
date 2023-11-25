@@ -4,6 +4,16 @@
 
 This tool converts your yml-Files from the Minecraft plugin [Villager Market](https://www.spigotmc.org/resources/villager-market-the-ultimate-shop-plugin.82965/) [(github)](https://github.com/Bestem0r/VillagerMarket) to a json-array and provides a html-file that shows offers and demands of the players out of the generated json data.
 
+## Contents displayed of HTML-Frontend
+
+- stock quantities
+- prices of offers and demands
+- price per unit
+- best-price-tags
+- discounts
+- separate tables for buying and selling
+- table of contents (all shops with scroll-link to shop)
+
 ## Prerequisites
 
 - Python3 (see [requirements.txt](requirements.txt) for neccesary plugins )
