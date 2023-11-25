@@ -1,4 +1,5 @@
 const dummyImagePath = 'assets/items/air.png'; // Path to dummy icon
+var selectedLanguage = null;
 let config = {};
 let translations = {};
 let availableImages = [];
