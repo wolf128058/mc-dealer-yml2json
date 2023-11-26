@@ -2,7 +2,7 @@
 
 ## Function
 
-This tool converts your yml-Files from the Minecraft plugin [Villager Market](https://www.spigotmc.org/resources/villager-market-the-ultimate-shop-plugin.82965/) [(github)](https://github.com/Bestem0r/VillagerMarket) to a json-array and provides a html-file that shows offers and demands of the players out of the generated json data.
+This tool converts your yml-Files from the Minecraft plugin [Villager Market](https://www.spigotmc.org/resources/villager-market-the-ultimate-shop-plugin.82965/) [(github)](https://github.com/Bestem0r/VillagerMarket) to a json-array and provides a html-file that shows offers and demands of the players and admin shops out of the generated json data.
 
 ## Contents displayed of HTML-Frontend
 
@@ -13,13 +13,14 @@ This tool converts your yml-Files from the Minecraft plugin [Villager Market](ht
 - discounts
 - separate tables for buying and selling
 - table of contents (all shops with scroll-link to shop)
+- location of the shops
 
 ## Prerequisites
 
 - Python3 (see [requirements.txt](requirements.txt) for neccesary plugins )
 - a scheduled job providing the yml-files in the subdirectory "data"
 - a scheduled job that runs the python script data-yml2json.py to generate the json data. You can use the same job to run those two tasks one after another. See [example-batch-script](mc-dealer-copy-execute.bat)
-- a webserver, that provides all the files. You may want to protect the data-Subdirectory. Feel free to use htacccess or similiar.
+- a webserver, that provides all the files. You may want to protect the data-Subdirectory. Feel free to use htaccess or similiar.
 - If you have [Josh's More Foods](https://modrinth.com/datapack/joshs-more-foods/) installed, there is a [script](assets/items/joshs-more-foods/rp-downloader.py) for you to download the neccesary images. Run it once.
 
 ## Demo
