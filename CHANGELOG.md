@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
+## [0.6.3] - 2020-11-27
+
+- Show location of the shops
+- Add background image
+- Add translation for harming potion
+
 ## [0.6.2] - 2020-11-25
 
 - Add admin shops with a nice little bot-icon and a infinity-icon for stock
