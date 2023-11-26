@@ -177,6 +177,12 @@ async function displayData(shops) {
 
       shopContainer.appendChild(shopInfo);
 
+      const shopLocation = document.createElement('div');
+      shopLocation.classList.add('shop-location');
+      shopLocation.textContent = `🚩 ${shop.location.x.toFixed(0)}, ${shop.location.y.toFixed(0)}, ${shop.location.z.toFixed(0)} @ ${shop.location.world}`;
+
+      shopInfo.appendChild(shopLocation);
+
       // Sales table
       if (Object.keys(shop.offers).length > 0) {
         const sellTableContainer = document.createElement('div');

@@ -139,6 +139,11 @@ body {
     color: #808080;
 }
 
+.shop-info .shop-location {
+    float: right;
+    font-size: 12px;
+}
+
 .selling-title,
 .buying-title {
     color: #ffffff;
