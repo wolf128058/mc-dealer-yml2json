@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
+## [NEXT]
+
+- Show enchantments and effects on items.
+
 ## [0.6.3] - 2020-11-27
 
 - Show location of the shops

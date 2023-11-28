@@ -43,6 +43,13 @@ body {
     float: left;
 }
 
+.item-enchantments {
+    color: #AA00AA;
+    float: right;
+    font-style: italic;
+    margin-right: 5px;
+}
+
 #languages-container {
     float: right;
 }
