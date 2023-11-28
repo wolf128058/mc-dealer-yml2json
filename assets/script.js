@@ -1,4 +1,5 @@
 const dummyImagePath = 'assets/items/air.png'; // Path to dummy icon
+const romanNumerals = {1: "I", 2: "II", 3: "III", 4: "IV", 5: "V" };
 var selectedLanguage = null;
 let config = {};
 let translations = {};
