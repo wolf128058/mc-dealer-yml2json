@@ -68,7 +68,7 @@ if __name__ == '__main__':
                 player_shop['owner_uuid'] = result_dict[shop]['ownerUUID']
             if player_shop['shop_type'] == 'ADMIN':
                 player_shop['owner_name'] = 'ADMIN'
-            
+
             if 'ownerName' in result_dict[shop]:
                 player_shop['owner_name'] = result_dict[shop]['ownerName']
 
@@ -126,7 +126,7 @@ if __name__ == '__main__':
                         elif 'type' in offer_data['price']:
                             player_offer['exchange_item'] = offer_data['price']['type'].replace("minecraft:", "", 1)
                             player_offer['price'] = offer_data['price']['amount']
-                        
+
 
                         player_offer['price_discount'] = 0
                         if 'discount' in offer_data and 'amount' in offer_data['discount']:
@@ -139,7 +139,7 @@ if __name__ == '__main__':
                         if player_shop['shop_type'] == 'ADMIN' and player_offer['exchange_item'] == 'money':
                             discounted_unitprice = player_offer['unit_price']  * (1 - (player_offer['price_discount'] / 100))
                             if player_offer['item'] not in BEST_OFFERS or BEST_OFFERS[player_offer['item']] > discounted_unitprice:
-                                BEST_OFFERS[player_offer['item']] = discounted_unitprice                            
+                                BEST_OFFERS[player_offer['item']] = discounted_unitprice
 
                         player_offers[item_index] = player_offer
 
