@@ -303,6 +303,30 @@ async function setupTable(table, items, isBuyTable, shopType) {
     itemNameCell.appendChild(itemImageSpan);
     itemNameCell.appendChild(itemNameText);
 
+    var txtEnchantments = "";
+    if (item.enchants && item.enchants.length > 0) {
+      const itemEnchantments = document.createElement("span");
+      itemEnchantments.classList.add("item-enchantments");
+    
+      const enchTranslationPromises = item.enchants.map(elem => getTranslation(elem.name));
+    
+      Promise.all(enchTranslationPromises)
+        .then(translations => {
+          translations.forEach((ench_translation, idx, array) => {
+            txtEnchantments = txtEnchantments.concat(`${ench_translation} ${romanNumerals[item.enchants[idx].level]}`);
+            if (idx < array.length - 1) {
+              txtEnchantments = txtEnchantments.concat(", ");
+            }
+          });
+          itemEnchantments.textContent = txtEnchantments;
+          itemNameCell.appendChild(itemEnchantments);
+        })
+        .catch(error => {
+          // Handle errors
+          console.error(error);
+        });
+    }
+    
     // quantity
     const amountCell = row.insertCell();
     amountCell.textContent = item.amount;
