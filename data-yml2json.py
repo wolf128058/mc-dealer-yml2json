@@ -136,6 +136,11 @@ if __name__ == '__main__':
                         player_offer['stock'] = 0
                         player_offer['is_best_price'] = None
 
+                        if 'meta' in offer_data['item'] and 'enchants' in offer_data['item']['meta']:
+                            player_offer['enchants'] = []
+                            for enchantment in offer_data['item']['meta']['enchants']:
+                                player_offer['enchants'].append(enchantment)
+
                         if player_shop['shop_type'] == 'ADMIN' and player_offer['exchange_item'] == 'money':
                             discounted_unitprice = player_offer['unit_price']  * (1 - (player_offer['price_discount'] / 100))
                             if player_offer['item'] not in BEST_OFFERS or BEST_OFFERS[player_offer['item']] > discounted_unitprice:
