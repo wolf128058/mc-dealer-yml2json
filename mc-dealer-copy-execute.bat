@@ -10,10 +10,13 @@ cd /d %~dp0
 
 :: Copy and execution script starts here
 :a
-
-	:: Copies the Shop UUID.yaml files from Villagermarket to the Data folder
+	:: Deletes old Shop UUID.yaml files from the Data folder and
+	:: Copies new Shop UUID.yaml files from Villagermarket to the Data folder
 	:: Change path1 to the path of your Minecraft plugin folder
 	:: Change path2 to your Shop Info webfiles folder
+	del "path2\data\*.yml" >nul
+	Echo Old Data has been deleted
+	TIMEOUT /T 2 >nul
 	xcopy /s/y/i "path1\VillagerMarket\Shops" "path2\data" >nul
 	Echo Data has been updated
 
