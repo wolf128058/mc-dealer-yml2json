@@ -125,7 +125,9 @@ if __name__ == '__main__':
                             player_offer['price'] = offer_data['price']
                         elif 'type' in offer_data['price']:
                             player_offer['exchange_item'] = offer_data['price']['type'].replace("minecraft:", "", 1)
-                            player_offer['price'] = offer_data['price']['amount']
+                            player_offer['price'] = 1
+                            if 'amount' in offer_data['price']:                                
+                                player_offer['price'] = offer_data['price']['amount']
 
 
                         player_offer['price_discount'] = 0
@@ -229,7 +231,7 @@ if __name__ == '__main__':
             for offer_key in shop['offers']:
                 discounted_unitprice = shop['offers'][offer_key]['unit_price']  * (1 - (shop['offers'][offer_key]['price_discount'] / 100))
                 best_offers_key = shop['offers'][offer_key]['item']
-                if (shop['shop_type'] == 'ADMIN' or shop['offers'][offer_key]['stock'] > 0) and discounted_unitprice == BEST_OFFERS[best_offers_key]:
+                if (shop['shop_type'] == 'ADMIN' or shop['offers'][offer_key]['stock'] > 0) and best_offers_key in BEST_OFFERS and discounted_unitprice == BEST_OFFERS[best_offers_key]:
                     shop['offers'][offer_key]['is_best_price'] = True
                 else:
                     shop['offers'][offer_key]['is_best_price'] = False

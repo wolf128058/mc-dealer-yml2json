@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
+## [NEXT]
+
+### Changed
+
+- Fixed an error with shops offering items for items (amount-key error)
+
+
 ## [0.6.4] - 2020-11-30
 
 ### Added
