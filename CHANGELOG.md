@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ## [NEXT]
 
+### Added
+
+- [Copy-Script](mc-dealer-copy-execute.bat):
+  - added internal/ftp/sftp/none-mode for doing copy-jobs
+  - added python-setup-job
+
 ### Changed
 
 - Fixed an error with shops offering items for items (amount-key error)
