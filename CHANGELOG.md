@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
-## [NEXT]
+## [0.6.5] - 2023-12-04
 
 ### Added
 
@@ -22,13 +22,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Copy-Script: Clear target data-directory before pushing new files there. And suddenly deletions magically work :) 
 - Moved translations to separate subdirectory
 
-## [0.6.4] - 2020-11-30
+## [0.6.4] - 2023-11-30
 
 ### Added
 
 - Display enchantments and effects on items.
 
-## [0.6.3] - 2020-11-27
+## [0.6.3] - 2023-11-27
 
 ### Added
 
@@ -36,21 +36,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Introduced a background image.
 - Added translation for harming potion.
 
-## [0.6.2] - 2020-11-25
+## [0.6.2] - 2023-11-25
 
 ### Added
 
 - Implemented admin shops with distinct icon (robot) for stock status.
 - Modified price calculation to prevent rounding to 2 decimals by Python for better best-price calculation. (Still rounded by Frontend-JS)
 
-## [0.6.1] - 2020-11-25
+## [0.6.1] - 2023-11-25
 
 ### Added
 
 - Additional translations available in IT, FR, and CN.
 - Simplified the font for display of CN translations.
 
-## [0.6.0] - 2020-11-25
+## [0.6.0] - 2023-11-25
 
 ### Added
 
@@ -59,14 +59,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Integrated a language selector in the HTML-GUI.
 - Cookie now saves the last language selection of users.
 
-## [0.5.1] - 2020-11-25
+## [0.5.1] - 2023-11-25
 
 ### Changed
 
 - Renamed current translations file with iso2alpha suffix for German.
 - Implemented translation of headlines via a JSON file for Translations.
 
-## [0.5.0] - 2020-11-25
+## [0.5.0] - 2023-11-25
 
 ### Added
 
