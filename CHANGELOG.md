@@ -13,10 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - added internal/ftp/sftp/none-mode for doing copy-jobs
   - added python-setup-job
 
+- New Translations:
+  - PL, PT, UA
+
 ### Changed
 
 - Fixed an error with shops offering items for items (amount-key error)
 - Copy-Script: Clear target data-directory before pushing new files there. And suddenly deletions magically work :) 
+- Effects got some prefixes in the translation files
 
 ## [0.6.4] - 2020-11-30
 
