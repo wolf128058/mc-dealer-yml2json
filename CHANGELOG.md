@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed an error with shops offering items for items (amount-key error)
 - Copy-Script: Clear target data-directory before pushing new files there. And suddenly deletions magically work :) 
 - Effects got some prefixes in the translation files
+- Moved translations to separate subdirectory
 
 ## [0.6.4] - 2020-11-30
 
