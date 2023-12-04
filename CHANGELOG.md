@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ## [NEXT]
 
+### Added
+
+- Search-function: show only shops, that offer items matchomg search-term
+
 ### Changed
 
 - Show flag-color of current language as bg of language-selector, texts in uppercase

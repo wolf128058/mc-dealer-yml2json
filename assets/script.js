@@ -497,5 +497,35 @@ function scrollToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+function performItemSearch() {
+  const searchInput = document.getElementById('item-search-input').value.toLowerCase();
+  const shopContainers = document.querySelectorAll('.shop-container');
+
+  shopContainers.forEach(shopContainer => {
+    const items = shopContainer.querySelectorAll('.item-name'); // Alle Item-Namen innerhalb des Shop-Containers
+
+    let matchFound = false;
+
+    items.forEach(item => {
+      const itemName = item.textContent.toLowerCase();
+
+      if (itemName.includes(searchInput)) {
+        matchFound = true;
+      }
+    });
+
+    if (matchFound) {
+      shopContainer.style.display = 'block';
+    } else {
+      shopContainer.style.display = 'none';
+    }
+  });
+
+  const nonMatchingShops = document.querySelectorAll('.shop-container:not([style="display: block;"])');
+  nonMatchingShops.forEach(shop => {
+    shop.style.display = 'none';
+  });
+}
 // Run fetchData on page load
 fetchData();
