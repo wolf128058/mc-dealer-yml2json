@@ -56,13 +56,17 @@ body {
 
 #languages-container select {
     background-color: #333;
-    color: #fff;
+    color: #333;
     border: 1px solid #555;
     padding: 8px;
     width: 3rem;
     border-radius: 4px;
     outline: none;
     position: relative;
+    text-shadow: .25rem .25rem .125rem rgb(255, 255, 255, 0.75);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 #languages-container select::after {

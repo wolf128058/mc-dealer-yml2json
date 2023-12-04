@@ -34,7 +34,7 @@ async function showTranslationMenu(languages2offer) {
   languages2offer.forEach(lang => {
     let langOption = document.createElement("option");
     langOption.setAttribute("value", lang);
-    langOption.textContent = lang;
+    langOption.textContent = lang.toUpperCase();
     langSelect.append(langOption);
   });
   langContainer.append(langSelect);
@@ -86,6 +86,7 @@ async function checkLanguageCookie(defaultLanguage) {
     selectElement.value = defaultLanguage;
     selectedLanguage = defaultLanguage;
   }
+  selectElement.setAttribute("style", "background-image: url('assets/translations/flag_" + selectedLanguage + ".svg');");
 }
 
 // Translation

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
+## [NEXT]
+
+### Changed
+
+- Show flag-color of current language as bg of language-selector, texts in uppercase
+
 ## [0.6.5] - 2023-12-04
 
 ### Added
