@@ -500,32 +500,60 @@ function scrollToTop() {
 
 function performItemSearch() {
   const searchInput = document.getElementById('item-search-input').value.toLowerCase();
+  const minSearchLength = 3;
   const shopContainers = document.querySelectorAll('.shop-container');
+  const searchSuggestions = document.getElementById('search-suggestions');
+  const addedSuggestions = new Set(); // Keep track of added suggestions
 
-  shopContainers.forEach(shopContainer => {
-    const items = shopContainer.querySelectorAll('.item-name'); // Alle Item-Namen innerhalb des Shop-Containers
+  searchSuggestions.style.display = 'none';
 
-    let matchFound = false;
+  if (searchInput.length > 0) {
+    searchSuggestions.style.display = 'block';
+  }
 
-    items.forEach(item => {
-      const itemName = item.textContent.toLowerCase();
+  searchSuggestions.innerHTML = '';
 
-      if (itemName.includes(searchInput)) {
-        matchFound = true;
+  if (searchInput.length >= minSearchLength) {
+    shopContainers.forEach(shopContainer => {
+      const items = shopContainer.querySelectorAll('.item-name');
+
+      items.forEach(item => {
+        const itemName = item.textContent.toLowerCase();
+
+        if (itemName.includes(searchInput) && !addedSuggestions.has(itemName)) {
+          item.classList.add('search-highlight');
+
+          const suggestionLink = document.createElement('a');
+          suggestionLink.href = '#';
+          suggestionLink.textContent = itemName;
+          suggestionLink.onclick = function () {
+            document.getElementById('item-search-input').value = itemName;
+            performItemSearch();
+          };
+
+          const suggestionItem = document.createElement('div');
+          suggestionItem.appendChild(suggestionLink);
+          searchSuggestions.appendChild(suggestionItem);
+
+          addedSuggestions.add(itemName); // Add the suggestion to the set
+        } else {
+          item.classList.remove('search-highlight');
+        }
+      });
+
+      const matchFound = Array.from(items).some(item => item.classList.contains('search-highlight'));
+
+      if (matchFound || searchInput.length < minSearchLength) {
+        shopContainer.style.display = 'block';
+      } else {
+        shopContainer.style.display = 'none';
       }
     });
-
-    if (matchFound) {
+  } else {
+    shopContainers.forEach(shopContainer => {
       shopContainer.style.display = 'block';
-    } else {
-      shopContainer.style.display = 'none';
-    }
-  });
-
-  const nonMatchingShops = document.querySelectorAll('.shop-container:not([style="display: block;"])');
-  nonMatchingShops.forEach(shop => {
-    shop.style.display = 'none';
-  });
+    });
+  }
 }
 // Run fetchData on page load
 fetchData();
