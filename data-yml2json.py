@@ -27,7 +27,7 @@ global BEST_DEMANDS
 BEST_DEMANDS = {}
 
 def clean_minecraft_string(text):
-    # Muster für Minecraft-Formatierungscodes
+    # Pattern for Minecraft formatting codes
     pattern = re.compile(r'§[0-9a-fklmnor]')
     return re.sub(pattern, '', text)
 
@@ -51,7 +51,7 @@ def read_yaml_files(directory):
                     # print(data)
     return data_dict
 
-# Verzeichnis mit den YAML-Dateien angeben
+# Specify the directory with the YAML files
 directory_path = "data/"
 result_dict = read_yaml_files(directory_path)
 
@@ -61,7 +61,7 @@ if __name__ == '__main__':
         for shop in result_dict:
             player_shop =  {}
 
-            # Meta-Daten des Shops
+            # Meta data of the shop
             player_shop['shop_uuid'] = result_dict[shop]['shop_uuid']
             player_shop['shop_type'] = result_dict[shop]['type']
             if 'ownerUUID' in result_dict[shop]:
@@ -82,13 +82,13 @@ if __name__ == '__main__':
                 'z':  result_dict[shop]['entity']['location']['z']
                 }
 
-            # Angebote des Händlers
             player_offers = {}
             player_demands = {}
 
             if 'items_for_sale' in result_dict[shop]:
                 for offer in result_dict[shop]['items_for_sale']:
                     offer_data = result_dict[shop]['items_for_sale'][offer]
+                    # Offers of the dealer
                     if offer_data['mode'] == 'SELL':
                         player_offer = {}
                         player_offer['own_name'] = None
@@ -150,8 +150,8 @@ if __name__ == '__main__':
 
                         player_offers[item_index] = player_offer
 
+                    # Demands of the dealer
                     elif offer_data['mode'] == 'BUY':
-                    # Nachfragen des Händlers
                         player_demand = {}
 
                         item_type = offer_data['item']['type']
@@ -176,7 +176,7 @@ if __name__ == '__main__':
                         if player_demand['exchange_item'] == 'money' and player_demand['item'] not in BEST_DEMANDS or BEST_DEMANDS[player_demand['item']] < player_demand['unit_price']:
                             BEST_DEMANDS[player_demand['item']] =  player_demand['unit_price']
 
-            # Lagerbestände
+            # stock levels
             player_stocks = {}
             if 'storage' in result_dict[shop]:
                 for stock in result_dict[shop]['storage']:
@@ -211,7 +211,7 @@ if __name__ == '__main__':
                     else:
                         player_stocks[item_index] += myamount
 
-                # Lagerbestände in die Angebote und Nachfragen übertragen
+                # Transfer stock levels to offers and demands
                 for stock_key in player_stocks:
                     if stock_key in player_offers:
                         best_offers_key = player_offers[stock_key]['item']
@@ -249,11 +249,11 @@ if __name__ == '__main__':
                 else:
                     shop['demands'][best_demands_key]['is_best_price'] = False
 
-        # Datenausgabe als JSON-Datei
+        # Data output as JSON file
         with open("output.json", "w") as outfile:
             outfile.write(json.dumps(player_shops))
 
-        # Error Handling (Fehlerausgabe im Fehlerfall)
+        # Error Handling (Error output in the event of an error)
         pass
     except Exception as e:
         traceback.print_exc()
