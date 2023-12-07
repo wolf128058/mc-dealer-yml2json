@@ -9,28 +9,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Search-function: show only shops, that offer items matchomg search-term
-
-### Changed
-
-- Show flag-color of current language as bg of language-selector, texts in uppercase
+- Search function: Display shops matching search terms.
+- Language selector now shows flag color for current language and displays text in uppercase.
 
 ## [0.6.5] - 2023-12-04
 
 ### Added
 
 - [Copy-Script](mc-dealer-copy-execute.bat):
-  - added internal/ftp/sftp/none-mode for doing copy-jobs
-  - added python-setup-job
-
+  - Added internal/ftp/sftp/none-mode for copy jobs.
+  - Included Python setup job.
 - New Translations:
   - PL, PT, UA
 
 ### Changed
 
 - Fixed an error with shops offering items for items (amount-key error)
-- Copy-Script: Clear target data-directory before pushing new files there. And suddenly deletions magically work :) 
-- Moved translations to separate subdirectory
+- Copy-Script now clears target data directory before transferring new files, resolving deletion issues.
+- Translations moved to a separate subdirectory.
 
 ## [0.6.4] - 2023-11-30
 
@@ -42,7 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Display shop locations.
+- Show shop locations.
 - Introduced a background image.
 - Added translation for harming potion.
 
@@ -50,31 +46,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Implemented admin shops with distinct icon (robot) for stock status.
-- Modified price calculation to prevent rounding to 2 decimals by Python for better best-price calculation. (Still rounded by Frontend-JS)
+- Implemented admin shops with distinct robot icon for stock status.
+- Adjusted price calculation to prevent Python's rounding to 2 decimals for better pricing accuracy (still rounded by Frontend-JS).
 
 ## [0.6.1] - 2023-11-25
 
 ### Added
 
 - Additional translations available in IT, FR, and CN.
-- Simplified the font for display of CN translations.
+- Simplified font for displaying CN translations.
 
 ## [0.6.0] - 2023-11-25
 
 ### Added
 
-- Providing translations in DE, EN, and ES now.
-- Included default language settings and of offered languages in the config.
-- Integrated a language selector in the HTML-GUI.
-- Cookie now saves the last language selection of users.
+- Translations provided in DE, EN, and ES.
+- Default language settings and offered languages integrated into the config.
+- HTML-GUI includes a language selector.
+- User's last language selection saved in a cookie.
 
 ## [0.5.1] - 2023-11-25
 
 ### Changed
 
 - Renamed current translations file with iso2alpha suffix for German.
-- Implemented translation of headlines via a JSON file for Translations.
+- Implemented headline translations via a JSON file for Translations.
 
 ## [0.5.0] - 2023-11-25
 
