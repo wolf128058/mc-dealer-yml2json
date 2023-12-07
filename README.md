@@ -28,7 +28,7 @@ A scheduled job should provide the YAML files in the subdirectory "data".
 Another scheduled job should run the Python script data-yml2json.py to generate JSON data. These tasks can be combined in a single job.
 
 **Batch Script Example:**
-*A [example-batch-script](mc-dealer-copy-execute.bat) is provided, containing optional Python installation, required libraries, and exporting output files to an external or internal web server via XCOPY, FTP, or SFTP. Configure the script for proper functionality.*
+A [example-batch-script](mc-dealer-copy-execute.bat) is provided, containing optional Python installation, required libraries, and exporting output files to an external or internal web server via XCOPY, FTP, or SFTP. Configure the script for proper functionality.
 
 **Web Server:**
 An internal or external web server is required to host all generated files. For Bukkit users, consider using plugins that provide internal web server functionality.
