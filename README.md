@@ -7,15 +7,25 @@ The Villager Market HTML Converter is a tool designed to streamline the process 
 ## Contents displayed of HTML-Frontend
 
 **Stock Quantities**
+
 **Prices of Offers and Demands**
+
 **Price per Unit**
+
 **Best-Price Tags**
+
 **Discounts**
+
 **Separate Tables for Buying and Selling**
+
 **Enchantments and Effects on Items**
+
 **Table of Contents** *(with scroll links to each shop)*
+
 **Locations of the Shops**
+
 **Custom Currency Symbol**
+
 **Translations** *available in German, English, French, Italian, Spanish, Polish, Ukrainian, Portuguese (Brazilian), and Simplified Chinese.*
 
 ## Prerequisites
