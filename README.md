@@ -20,23 +20,23 @@ The Villager Market HTML Converter is a tool designed to streamline the process 
 
 ## Prerequisites
 
-**Python3:**
+- **Python3:**
 Ensure that Python3 is installed. Refer to the [requirements.txt](requirements.txt) file for necessary plugins.
 
-**Scheduled Jobs:**
+- **Scheduled Jobs:**
 A scheduled job should provide the YAML files in the subdirectory "data".
 Another scheduled job should run the Python script data-yml2json.py to generate JSON data. These tasks can be combined in a single job.
 
-**Batch Script Example:**
+- **Batch Script Example:**
 A [example-batch-script](mc-dealer-copy-execute.bat) is provided, containing optional Python installation, required libraries, and exporting output files to an external or internal web server via XCOPY, FTP, or SFTP. Configure the script for proper functionality.
 
-**Web Server:**
+- **Web Server:**
 An internal or external web server is required to host all generated files. For Bukkit users, consider using plugins that provide internal web server functionality.
 
-**Data Subdirectory Protection:**
+- **Data Subdirectory Protection:**
 Consider securing the data subdirectory using tools like .htaccess or similar methods.
 
-**Josh's More Foods Compatibility:**
+- **Josh's More Foods Compatibility:**
 If [Josh's More Foods](https://modrinth.com/datapack/joshs-more-foods/) is installed, a [script](assets/items/joshs-more-foods/rp-downloader.py) is available to download necessary images. Run it once to ensure compatibility.
 
 ## Usage Instructions:
