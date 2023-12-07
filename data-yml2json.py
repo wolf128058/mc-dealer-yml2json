@@ -211,7 +211,7 @@ if __name__ == '__main__':
                     else:
                         player_stocks[item_index] += myamount
 
-                # Lagerbestände in die Angebote übertragen
+                # Lagerbestände in die Angebote und Nachfragen übertragen
                 for stock_key in player_stocks:
                     if stock_key in player_offers:
                         best_offers_key = player_offers[stock_key]['item']
@@ -220,6 +220,12 @@ if __name__ == '__main__':
 
                         if player_offers[stock_key]['exchange_item'] == 'money' and player_stocks[stock_key] > 0 and best_offers_key not in BEST_OFFERS or BEST_OFFERS[best_offers_key] > discounted_unitprice:
                             BEST_OFFERS[best_offers_key] = discounted_unitprice
+                    if stock_key in player_demands and 'buy_limit' in player_demands[stock_key] and player_shop['shop_type'] == 'PLAYER':
+                        player_demands[stock_key]['buy_limit'] -= player_stocks[stock_key]
+                        if player_demands[stock_key]['buy_limit'] < 0:
+                            player_demands[stock_key]['buy_limit'] = 0
+                        
+
 
             player_shop['offers'] = player_offers
             player_shop['demands'] = player_demands
