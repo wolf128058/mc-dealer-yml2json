@@ -102,6 +102,13 @@ async function getTranslation(text) {
   }
 }
 
+async function setPlaceholder() {
+const placeholder = await getTranslation('MCDEALER_SEARCH_BAR_PLACEHOLDER');
+document.getElementById('item-search-input').placeholder = placeholder;
+}
+
+window.onload = setPlaceholder;
+
 async function fetchData() {
   try {
     config = await fetchConfig();
