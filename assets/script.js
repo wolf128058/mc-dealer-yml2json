@@ -42,7 +42,7 @@ async function showTranslationMenu(languages2offer) {
 
 async function loadTranslations(iso2alpha) {
   try {
-    const response = await fetch("assets/translations/translations_" + iso2alpha + ".json");
+    const response = await fetch("assets/translations/" + iso2alpha + ".json");
     translations = await response.json();
   } catch (error) {
     console.error("Error reading translation list:", error);
