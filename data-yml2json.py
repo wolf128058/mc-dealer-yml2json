@@ -126,7 +126,7 @@ if __name__ == '__main__':
                         elif 'type' in offer_data['price']:
                             player_offer['exchange_item'] = offer_data['price']['type'].replace("minecraft:", "", 1)
                             player_offer['price'] = 1
-                            if 'amount' in offer_data['price']:                                
+                            if 'amount' in offer_data['price']:
                                 player_offer['price'] = offer_data['price']['amount']
 
 
