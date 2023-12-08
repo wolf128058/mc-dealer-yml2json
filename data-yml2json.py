@@ -11,11 +11,11 @@ Gibt einen JSON Array aus für ein Data-Verzeichnis voller Händlerdaten
 """
 
 import os
-import yaml
 import json
 import re
 import traceback
 from datetime import datetime
+import yaml
 
 global LATEST_FILEMODDATE
 LATEST_FILEMODDATE = None
