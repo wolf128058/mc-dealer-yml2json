@@ -102,10 +102,11 @@ async function getTranslation(text) {
   }
 }
 
-async function setPlaceholder() {
-const placeholder = await getTranslation('MCDEALER_SEARCH_BAR_PLACEHOLDER');
-document.getElementById('item-search-input').placeholder = placeholder;
+async function setSearchPlaceholder() {
+  const placeholder = await getTranslation('MCDEALER_SEARCH_BAR_PLACEHOLDER');
+  document.getElementById('item-search-input').placeholder = placeholder;
 }
+
 async function fetchData() {
   try {
     config = await fetchConfig();
@@ -113,6 +114,7 @@ async function fetchData() {
     const data = await response.json();
     showTranslationMenu(config.offerLanguages);
     checkLanguageCookie(config.defaultLanguage);
+    setSearchPlaceholder();
     displayData(data.shops);
     displayLatestFileModDate(data.meta.latestfilemoddate_formatted);
   } catch (error) {
