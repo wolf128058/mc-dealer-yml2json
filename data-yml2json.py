@@ -192,8 +192,8 @@ if __name__ == '__main__':
                             item_index = own_name
 
                     elif item_type == 'ENCHANTED_BOOK':
-                            item_type = 'ENCHANTED_BOOK_' + list(stock['meta']['stored-enchants'])[0]
-                            item_index = item_type
+                        item_type = 'ENCHANTED_BOOK_' + list(stock['meta']['stored-enchants'])[0]
+                        item_index = item_type
 
                     if 'meta' in stock and 'display-name' in stock['meta']:
                         json_displayname = json.loads(stock['meta']['display-name'])
