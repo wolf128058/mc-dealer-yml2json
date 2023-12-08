@@ -52,8 +52,8 @@ def read_yaml_files(directory):
     return data_dict
 
 # Specify the directory with the YAML files
-directory_path = "data/"
-result_dict = read_yaml_files(directory_path)
+DIRECTORY_PATH = "data/"
+result_dict = read_yaml_files(DIRECTORY_PATH)
 
 if __name__ == '__main__':
     try:
