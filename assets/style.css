@@ -82,7 +82,8 @@ body {
     background-color: #444;
 }
 
-#output-container-metadata {
+#output-container-metadata,
+#output-container-poweredby {
     font-size: 14px;
     margin-top: 1rem;
     text-align: right;
