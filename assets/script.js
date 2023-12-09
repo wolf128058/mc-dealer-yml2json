@@ -129,10 +129,14 @@ function displayLatestFileModDate(date) {
 
 async function displayData(shops) {
   const outputContainer = document.getElementById('output-container');
-  const indexContainer = document.getElementById('output-container-indextable');
-  const indexHeadline = document.createElement('h2');
-  indexHeadline.textContent = 'Shops';
-  indexContainer.append(indexHeadline)
+  const adminIndexContainer = document.getElementById('output-adminIndexContainer');
+  const playerIndexContainer = document.getElementById('output-playerIndexContainer');
+  const adminIndexHeadline = document.createElement('h2');
+  adminIndexHeadline.textContent = await getTranslation('MCDEALER_INDEX_ADMIN_HEADLINE');
+  adminIndexContainer.append(adminIndexHeadline);
+  const playerIndexHeadline = document.createElement('h2');
+  playerIndexHeadline.textContent = await getTranslation('MCDEALER_INDEX_PLAYER_HEADLINE');
+  playerIndexContainer.append(playerIndexHeadline);
 
   if (Array.isArray(shops)) {
     for (const shop of shops) {
@@ -146,11 +150,10 @@ async function displayData(shops) {
       const indexLink = document.createElement('a');
       indexLink.setAttribute('href', '#' + shop.shop_uuid);
 
-
       const indexName = document.createElement('span');
       indexName.classList.add('index-shop-name');
       indexName.textContent = shop.shop_name;
-      indexLink.appendChild(indexName)
+      indexLink.appendChild(indexName);
 
       const indexOwner = document.createElement('span');
       indexOwner.classList.add('index-shop-owner');
@@ -158,7 +161,12 @@ async function displayData(shops) {
       indexLink.appendChild(indexOwner);
 
       indexEntry.appendChild(indexLink);
-      indexContainer.appendChild(indexEntry);
+      // Check shop type and add to the appropriate container
+      if (shop.shop_type === 'ADMIN') {
+        adminIndexContainer.appendChild(indexEntry);
+      } else {
+        playerIndexContainer.appendChild(indexEntry);
+      }
 
       // Shop-Container
       const shopContainer = document.createElement('div');
