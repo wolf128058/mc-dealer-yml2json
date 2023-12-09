@@ -90,7 +90,7 @@ body {
     width: 100%;
 }
 
-#output-container-indextable {
+#output-playerIndexContainer{
     background-color: #111;
     border: 2px solid #333;
     border-radius: .75rem;
@@ -100,7 +100,26 @@ body {
     flex-wrap: wrap;
 }
 
-#output-container-indextable h2 {
+#output-playerIndexContainer h2 {
+    font-family: 'Minecraftia', sans-serif;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    color: #0000aa;
+}
+
+#output-adminIndexContainer{
+    background-color: #111;
+    border: 2px solid #333;
+    border-radius: .75rem;
+    margin-top: 1.25rem;
+    padding: .75rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#output-adminIndexContainer h2 {
     font-family: 'Minecraftia', sans-serif;
     padding: 0;
     margin: 0;
