@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Search function: Display shops matching search terms.
 - Language selector now shows flag color for current language and displays text in uppercase.
 - Translations for player and admin shop indexes
+- Translations for 1.20.3 Items
+- Icons for 1.20.3 Items (Tinyfied)
 
 ### Changed
 
