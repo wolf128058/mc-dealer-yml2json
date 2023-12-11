@@ -16,6 +16,7 @@ The Villager Market HTML Converter is a tool designed to streamline the process 
 - Table of Contents *(with scroll links to each shop)*
 - Shop Locations
 - Custom Currency Symbol
+- Search function: Display shops matching search terms
 - Translations available in:
   - German
   - English
