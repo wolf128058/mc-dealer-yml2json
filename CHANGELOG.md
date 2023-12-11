@@ -18,7 +18,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Already stocked amounts of player shops are subtracted from demands.
-- Separated players and admin shops 
+- Separated players and admin shops
+- Fixed chinese index header alignment 
 
 ## [0.6.5] - 2023-12-04
 
