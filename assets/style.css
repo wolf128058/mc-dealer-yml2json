@@ -208,6 +208,17 @@ body {
     padding: .75rem;
 }
 
+.shop-container.zero-stock {
+  display: none;
+}
+
+#hideZeroStock {
+  margin-left: 10px;
+}
+
+.hideZeroStockLabel {
+}
+
 .shop-info {
     margin-bottom: .75rem;
 }

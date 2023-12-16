@@ -107,6 +107,12 @@ async function setSearchPlaceholder() {
   document.getElementById('item-search-input').placeholder = placeholder;
 }
 
+async function setZeroStockText() {
+  const label = document.getElementById('hideZeroStockLabel');
+  const translatedText = await getTranslation('MCDEALER_ZERO_STOCK_TEXT');
+  label.textContent = translatedText;
+}
+
 async function fetchData() {
   try {
     config = await fetchConfig();
@@ -115,6 +121,7 @@ async function fetchData() {
     showTranslationMenu(config.offerLanguages);
     checkLanguageCookie(config.defaultLanguage);
     setSearchPlaceholder();
+	setZeroStockText();
     displayData(data.shops);
     displayLatestFileModDate(data.meta.latestfilemoddate_formatted);
   } catch (error) {
@@ -137,6 +144,7 @@ async function displayData(shops) {
   const playerIndexHeadline = document.createElement('h2');
   playerIndexHeadline.textContent = await getTranslation('MCDEALER_INDEX_PLAYER_HEADLINE');
   playerIndexContainer.append(playerIndexHeadline);
+  const hideZeroStockCheckbox = document.getElementById('hideZeroStock');
 
   if (Array.isArray(shops)) {
     for (const shop of shops) {
@@ -487,8 +495,28 @@ async function setupTable(table, items, isBuyTable, shopType) {
     } else {
       stockCell.textContent = '∞';
     }
+    // Add a class based on the stock value
+    stockCell.classList.add(item.stock === 0 ? 'zero-stock' : 'non-zero-stock');
   }
 }
+
+function toggleZeroStockVisibility() {
+  const hideZeroStockCheckbox = document.getElementById('hideZeroStock');
+  const articles = document.querySelectorAll('.shop-container');
+
+  if (hideZeroStockCheckbox.checked) {
+    articles.forEach(article => {
+      if (article.querySelector('.zero-stock')) {
+        article.style.display = 'none';
+      }
+    });
+  } else {
+    articles.forEach(article => {
+      article.style.display = 'block';
+    });
+  }
+}
+
 
 window.onscroll = function() {
   scrollFunction();

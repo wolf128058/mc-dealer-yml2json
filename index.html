@@ -31,7 +31,7 @@
     <div id="output-playerIndexContainer"></div>
     </div>
     <div class="search-container">
-      <input type="text" id="item-search-input" oninput="performItemSearch()" placeholder="Suche nach Artikeln...">
+      <input type="text" id="item-search-input" oninput="performItemSearch()" placeholder="Suche nach Artikeln..."><input type="checkbox" id="hideZeroStock" onchange="toggleZeroStockVisibility()"><label for="hideZeroStock">Hide Zero Stock</label>
       <div id="search-suggestions" class="search-suggestions"></div>
     </div>
     <div style="clear: both"></div>
