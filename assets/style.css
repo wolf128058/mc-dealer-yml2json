@@ -286,6 +286,11 @@ tr:nth-child(2n+1) {
     background-color: #1a1a1a;
 }
 
+
+tr.sold-out {
+    background-color: #340e0b;
+}
+
 body.enabled-zero-stock-hiding tr.sold-out {
     display: none;
 }
