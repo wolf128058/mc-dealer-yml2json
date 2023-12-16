@@ -305,7 +305,7 @@ tr:nth-child(2n+1) {
     color: red;
 }
 
-.sold-out {
+td.sold-out {
     color: red;
 }
 
