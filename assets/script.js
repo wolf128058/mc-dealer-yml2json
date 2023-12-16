@@ -485,9 +485,15 @@ async function setupTable(table, items, isBuyTable, shopType) {
       if (isBuyTable) {
         stockCell.textContent = item.buy_limit;
       } else {
-        stockCell.textContent = item.stock === 0
-          ? await getTranslation('MCDEALER_LABEL_SOLD_OUT')
-          : item.stock;
+
+        if ( item.stock === 0) {
+          stockCell.textContent = await getTranslation('MCDEALER_LABEL_SOLD_OUT');
+          stockCell.classList.add('sold-out');
+          row.classList.add('sold-out');
+        } else {
+          stockCell.textContent = item.stock;
+        }
+
         if (item.stock < 5) {
           stockCell.classList.add('low-stock');
         }
