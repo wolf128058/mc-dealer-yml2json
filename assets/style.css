@@ -90,7 +90,7 @@ body {
     width: 100%;
 }
 
-#output-playerIndexContainer{
+#output-playerIndexContainer {
     background-color: #111;
     border: 2px solid #333;
     border-radius: .75rem;
@@ -110,7 +110,7 @@ body {
     color: #0000aa;
 }
 
-#output-adminIndexContainer{
+#output-adminIndexContainer {
     background-color: #111;
     border: 2px solid #333;
     border-radius: .75rem;
@@ -209,11 +209,11 @@ body {
 }
 
 .shop-container.zero-stock {
-  display: none;
+    display: none;
 }
 
 #hideZeroStock {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .shop-info {
