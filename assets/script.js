@@ -502,18 +502,10 @@ async function setupTable(table, items, isBuyTable, shopType) {
 
 function toggleZeroStockVisibility() {
   const hideZeroStockCheckbox = document.getElementById('hideZeroStock');
-  const articles = document.querySelectorAll('.shop-container');
-
   if (hideZeroStockCheckbox.checked) {
-    articles.forEach(article => {
-      if (article.querySelector('.zero-stock')) {
-        article.style.display = 'none';
-      }
-    });
+    document.body.classList.add('enabled-zero-stock-hiding');
   } else {
-    articles.forEach(article => {
-      article.style.display = 'block';
-    });
+    document.body.classList.remove('enabled-zero-stock-hiding');
   }
 }
 
