@@ -1,0 +1,29 @@
+name: Python Validation
+
+on:
+  pull_request:
+    paths:
+      - '**/*.py'
+
+jobs:
+  validate_python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '~3.10'
+
+      - name: Validate Python files
+        run: |
+          python_files=$(find . -name '*.py')
+          for file in $python_files; do
+            if ! python -m py_compile "$file"; then
+              echo "Invalid Python syntax in file $file"
+              exit 1
+            fi
+          done
