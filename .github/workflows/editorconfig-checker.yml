@@ -1,6 +1,7 @@
 name: EditorConfig Validation
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - '**/*.css'

@@ -1,6 +1,7 @@
 name: Python Validation
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - '**/*.py'

@@ -1,6 +1,7 @@
 name: JavaScript Validation
 
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'assets/**/*.js'
