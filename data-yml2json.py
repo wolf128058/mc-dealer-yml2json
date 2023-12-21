@@ -333,7 +333,7 @@ if __name__ == "__main__":
                     shop["demands"][best_demands_key]["is_best_price"] = False
 
         # Data output as JSON file
-        with open("output.json", "w") as outfile:
+        with open("web/output.json", "w") as outfile:
             outfile.write(json.dumps(player_shops))
 
         # Error Handling (Error output in the event of an error)

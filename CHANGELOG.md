@@ -5,9 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
  
+## [NEXT]
+
+### Changed
+
+- Moved web-output/assets to separate web-root subdirectory
+
 ## [0.7.1] - 2023-12-16
 
 ### Added
+
 - Sold out items are highlighted table-rows now.
 - You can toggle hiding this rows.
 
