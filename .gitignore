@@ -1,3 +1,4 @@
 /data/*.yml
+/hidden_shops.json
 /web/assets/items/joshs-more-foods/*.png
 /web/output.json
