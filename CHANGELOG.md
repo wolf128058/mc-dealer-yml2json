@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  
 ## [NEXT]
 
+### Added
+
+- Implement hiding of shops in a separate file, 'hidden_shops.json', using their UUIDs (from shop YAML filenames or player UUIDs).
+
 ### Changed
 
-- Moved web-output/assets to separate web-root subdirectory
+- Relocated web-output and -assets to a dedicated subdirectory within the web root.
 
 ## [0.7.1] - 2023-12-16
 
