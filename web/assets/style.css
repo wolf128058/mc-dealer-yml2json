@@ -43,6 +43,7 @@ body {
     float: left;
 }
 
+.item-drawer,
 .item-enchantments {
     color: #AA00AA;
     float: right;

@@ -349,7 +349,17 @@ async function setupTable(table, items, isBuyTable, shopType) {
           console.error(error);
         });
     }
-    
+
+    var txtDrawer = "";
+    if (item.simpledrawer) {
+      console.log(item.simpledrawer)
+      const itemDrawer = document.createElement("span");
+      itemDrawer.classList.add("item-drawer");
+      txtDrawer = 'Type: ' + item.simpledrawer.type + ', Variant: ' + item.simpledrawer.variant + ', Upgrade: ' + item.simpledrawer.upgrade + ', Wood: '  + item.simpledrawer.wood_type
+      itemDrawer.textContent = txtDrawer;    
+      itemNameCell.appendChild(itemDrawer);
+    }
+
     // quantity
     const amountCell = row.insertCell();
     amountCell.textContent = item.amount;
