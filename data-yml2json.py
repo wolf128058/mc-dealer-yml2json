@@ -13,6 +13,9 @@ Gibt einen JSON Array aus für ein Data-Verzeichnis voller Händlerdaten
 import os
 import json
 import re
+import base64
+import nbtlib
+import tempfile
 import traceback
 from datetime import datetime
 import yaml
@@ -51,6 +54,16 @@ def read_uuids_from_file(file_path):
                 pass
 
     return uuid_list
+
+def decode_nbt_data(base64_string):
+    decoded_bytes = base64.b64decode(base64_string)
+    
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(decoded_bytes)
+        temp_file.seek(0)
+        nbt_data = nbtlib.load(temp_file.name)
+    
+    return nbt_data
 
 def read_yaml_files(directory):
     global LATEST_FILEMODDATE
@@ -190,20 +203,43 @@ if __name__ == "__main__":
                         player_offer["stock"] = 0
                         player_offer["is_best_price"] = None
 
-                        if (
-                            "meta" in offer_data["item"]
-                            and "enchants" in offer_data["item"]["meta"]
-                        ):
-                            player_offer["enchants"] = []
-                            for enchantment in offer_data["item"]["meta"]["enchants"]:
-                                player_offer["enchants"].append(
-                                    {
-                                        "name": enchantment,
-                                        "level": offer_data["item"]["meta"]["enchants"][
-                                            enchantment
-                                        ],
-                                    }
-                                )
+                        if "meta" in offer_data["item"]:
+                            if "enchants" in offer_data["item"]["meta"]:
+                                player_offer["enchants"] = []
+                                for enchantment in offer_data["item"]["meta"]["enchants"]:
+                                    player_offer["enchants"].append(
+                                        {
+                                            "name": enchantment,
+                                            "level": offer_data["item"]["meta"]["enchants"][
+                                                enchantment
+                                            ],
+                                        }
+                                    )
+                            if "ItemFlags" in offer_data["item"]["meta"] and "HIDE_ARMOR_TRIM" in offer_data["item"]["meta"]["ItemFlags"] and "internal" in offer_data["item"]["meta"]:
+                                internal_data = decode_nbt_data(offer_data["item"]["meta"]["internal"])
+
+                                if ("BlockEntityTag" in internal_data 
+                                    and "Items" in internal_data["BlockEntityTag"] 
+                                    and len(internal_data["BlockEntityTag"]["Items"]) > 0
+                                    and "tag" in internal_data["BlockEntityTag"]["Items"][0]
+                                    and "simpledrawer" in internal_data["BlockEntityTag"]["Items"][0]["tag"]
+                                    ):
+
+                                    simpledrawer_data = internal_data["BlockEntityTag"]["Items"][0]["tag"]["simpledrawer"]
+                                    # cleanups
+                                    if("maxCount" in simpledrawer_data):
+                                        del(simpledrawer_data["maxCount"])
+                                    if("version" in simpledrawer_data):
+                                        del(simpledrawer_data["version"])
+                                    if("globalCount" in simpledrawer_data):
+                                        del(simpledrawer_data["globalCount"])
+                                    if("wood_type" in simpledrawer_data):
+                                        if simpledrawer_data["wood_type"].startswith("simpledrawer:"):
+                                            simpledrawer_data["wood_type"] = simpledrawer_data["wood_type"][13:]
+
+                                    player_offer["simpledrawer"] = simpledrawer_data
+                                    
+
 
                         if (
                             player_shop["shop_type"] == "ADMIN"
