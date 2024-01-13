@@ -224,8 +224,22 @@ if __name__ == "__main__":
                                     and "tag" in internal_data["BlockEntityTag"]["Items"][0]
                                     and "simpledrawer" in internal_data["BlockEntityTag"]["Items"][0]["tag"]
                                     ):
-                                    player_offer["simpledrawer"] = {}
-                                    player_offer["simpledrawer"] = internal_data["BlockEntityTag"]["Items"][0]["tag"]["simpledrawer"]
+
+                                    simpledrawer_data = internal_data["BlockEntityTag"]["Items"][0]["tag"]["simpledrawer"]
+                                    # cleanups
+                                    if("maxCount" in simpledrawer_data):
+                                        del(simpledrawer_data["maxCount"])
+                                    if("version" in simpledrawer_data):
+                                        del(simpledrawer_data["version"])
+                                    if("globalCount" in simpledrawer_data):
+                                        del(simpledrawer_data["globalCount"])
+                                    if("wood_type" in simpledrawer_data):
+                                        if simpledrawer_data["wood_type"].startswith("simpledrawer:"):
+                                            simpledrawer_data["wood_type"] = simpledrawer_data["wood_type"][13:]
+
+                                    player_offer["simpledrawer"] = simpledrawer_data
+                                    
+
 
                         if (
                             player_shop["shop_type"] == "ADMIN"
