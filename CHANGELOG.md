@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Relocated web-output and -assets to a dedicated subdirectory within the web root.
+- Fix: Display individual named items and their stocks.
 
 ## [0.7.1] - 2023-12-16
 
