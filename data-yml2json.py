@@ -172,6 +172,7 @@ if __name__ == "__main__":
                             elif ("extra" in json_displayname
                                 and len(json_displayname["extra"]) > 0):
                                 player_offer["own_name"] = json_displayname["extra"][0]
+                                item_index = player_offer["own_name"]
                             elif "translate" in json_displayname:
                                 player_offer["own_name"] = json_displayname["translate"]
                                 item_index = player_offer["own_name"]
