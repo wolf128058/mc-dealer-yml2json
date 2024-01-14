@@ -74,7 +74,7 @@ echo Upgrading pip...
 python -m pip install --upgrade pip
 
 :: Install or upgrade dependencies
-for %%P in (Pillow PyYAML requests) do (
+for %%P in (Pillow PyYAML requests nbtlib) do (
     pip install --upgrade %%P
 )
 
