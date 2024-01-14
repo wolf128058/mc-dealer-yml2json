@@ -164,11 +164,14 @@ if __name__ == "__main__":
                             json_displayname = json.loads(
                                 offer_data["item"]["meta"]["display-name"]
                             )
-                            if "extra" in json_displayname:
-                                player_offer["own_name"] = json_displayname["extra"][0][
-                                    "text"
-                                ]
+                            if ("extra" in json_displayname
+                                and len(json_displayname["extra"]) > 0
+                                and "text" in json_displayname["extra"][0]):
+                                player_offer["own_name"] = json_displayname["extra"][0]["text"]
                                 item_index = player_offer["own_name"]
+                            elif ("extra" in json_displayname
+                                and len(json_displayname["extra"]) > 0):
+                                player_offer["own_name"] = json_displayname["extra"][0]
                             elif "translate" in json_displayname:
                                 player_offer["own_name"] = json_displayname["translate"]
                                 item_index = player_offer["own_name"]
@@ -318,8 +321,13 @@ if __name__ == "__main__":
 
                     if "meta" in stock and "display-name" in stock["meta"]:
                         json_displayname = json.loads(stock["meta"]["display-name"])
-                        if "extra" in json_displayname:
+                        if ("extra" in json_displayname
+                             and len(json_displayname["extra"]) > 0
+                             and "text" in json_displayname["extra"][0]):
                             item_index = json_displayname["extra"][0]["text"]
+                        elif ("extra" in json_displayname
+                            and len(json_displayname["extra"]) > 0):
+                            item_index = json_displayname["extra"][0]
                         elif "translate" in json_displayname:
                             item_index = json_displayname["translate"]
 
