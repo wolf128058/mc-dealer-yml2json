@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Implement hiding of shops in a separate file, 'hidden_shops.json', using their UUIDs (from shop YAML filenames or player UUIDs).
+- Show more data about SimpleDrawer Items
 
 ### Changed
 
