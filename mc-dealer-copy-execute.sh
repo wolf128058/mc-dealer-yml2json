@@ -28,7 +28,6 @@ SFTP_REMOTE_DIR=""
 # DO NOT CHANGE ANYTHING BELOW THIS POINT! UNLESS YOU KNOW WHAT YOU'RE DOING!
 
 # Python, Tar, and Curl install script
-PYTHON_VERSION="3.9.7"
 PIP_VERSION="21.2.4"
 CURL_VERSION="7.79.1"
 CURL_URL="https://curl.se/windows/dl-ssl/curl-$CURL_VERSION-win64-mingw.zip"
@@ -55,11 +54,10 @@ else
 fi
 
 # Check if python is already installed
-if ! command -v python &> /dev/null; then
+if ! command -v python3 &> /dev/null; then
     echo "Python is not installed. Installing the latest Python version..."
-    curl -o python-installer.exe https://www.python.org/ftp/python/latest/python-latest-amd64.exe
-    python-installer.exe /quiet PrependPath=1 Include_test=0 TargetDir=/usr/local/python/
-    rm python-installer.exe
+    sudo apt update
+    sudo apt install python3 -y
 fi
 
 export PATH=$PATH:/usr/local/python/Scripts
