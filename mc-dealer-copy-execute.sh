@@ -74,7 +74,7 @@ done
 
 echo "Installation completed."
 
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit
 
 # Check if required settings are present
 if [ -z "$PYTHON_SCRIPT_PATH" ]; then
@@ -139,11 +139,11 @@ while true; do
         echo "bin" >> ftpcmd.dat
         echo "put \"$PYTHON_SCRIPT_PATH/output.json\" \"$FTP_REMOTE_DIR\"" >> ftpcmd.dat
         echo "quit" >> ftpcmd.dat
-        ftp -n -s:ftpcmd.dat $FTP_SERVER
+        ftp -n -s:ftpcmd.dat "$FTP_SERVER"
         rm ftpcmd.dat
         echo "Data has been transferred via FTP"
     elif [ "$MODE" == "SFTP" ]; then
-        echo "put \"$PYTHON_SCRIPT_PATH/output.json\" \"$SFTP_REMOTE_DIR\"" | sftp -l $SFTP_USERNAME -pw $SFTP_PASSWORD $SFTP_SERVER
+        echo "put \"$PYTHON_SCRIPT_PATH/output.json\" \"$SFTP_REMOTE_DIR\"" | sftp -l "$SFTP_USERNAME" -pw "$SFTP_PASSWORD" "$SFTP_SERVER"
         echo "Data has been transferred via SFTP"
     else
         echo "Data has been stored in the script folder"
