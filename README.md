@@ -1,5 +1,7 @@
 # Villager Market HTML Converter
 
+[![CodeFactor](https://www.codefactor.io/repository/github/wolf128058/mc-dealer-yml2json/badge)](https://www.codefactor.io/repository/github/wolf128058/mc-dealer-yml2json)
+
 ## Function
 
 The Villager Market HTML Converter is a tool designed to streamline the process of converting YAML files from the Minecraft plugin [Villager Market](https://www.spigotmc.org/resources/villager-market-the-ultimate-shop-plugin.82965/) ([GitHub](https://github.com/Bestem0r/VillagerMarket)) into a JSON array. Additionally, it provides an HTML file that comprehensively displays offers and demands from players and admin shops, utilizing the processed JSON data.
