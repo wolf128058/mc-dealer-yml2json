@@ -121,7 +121,9 @@ if __name__ == "__main__":
             player_shop["shop_name"] = re.sub(
                 r"\[.*?\]", "", player_shop["shop_name"]
             ).strip()
-            player_shop["npc_profession"] = result_dict[shop]["entity"]["profession"]
+            player_shop["npc_profession"] = None
+            if 'entity' in result_dict[shop]["entity"]:
+                player_shop["npc_profession"] = result_dict[shop]["entity"]["profession"]
             player_shop["location"] = {
                 "world": result_dict[shop]["entity"]["location"]["world"],
                 "x": result_dict[shop]["entity"]["location"]["x"],
